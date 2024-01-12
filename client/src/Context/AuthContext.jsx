@@ -10,10 +10,10 @@ import {} from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 export const dDomain = "https://test-blackis.dolphinvc.com/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -1171,7 +1171,7 @@ export const AuthProvider = ({ children }) => {
         let heart = false;
         for (let course of res.data) {
           heart = false;
-          if (course.Reactions.length > 0) {
+          if (course?.Reactions?.length > 0) {
             for (let reactors of course.Reactions) {
               let userID = localStorage.getItem("User");
               if (reactors.reactor_id === Number(userID)) {
