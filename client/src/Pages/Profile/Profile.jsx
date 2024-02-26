@@ -129,9 +129,9 @@ const Profile = () => {
   // const [showclasses, setShowclasses] = useState(false);
 
   return (
-    <Container fluid className="m-0 p-0 bgg">
+    <Container fluid className="m-0 p-0 ">
       <Header />
-      <Container fluid className="white bggrey"></Container>
+      <Container fluid className="white "></Container>
       {showclasses ? (
         <Container fluid className="p-0 m-0">
           <Container>
@@ -141,18 +141,18 @@ const Profile = () => {
       ) : (
         <>
           <Whatsnew />
-          <Container fluid className="p-0 m-0 bggrey">
+          <Container fluid className="p-0 m-0  w-100 bgw ">
             <Container
-              className="p-2 pt-4"
-              style={{
-                maxWidth: "1000px",
-              }}
+              className="p-0 w-100 pt-4 cont-feed m-0"
+              // style={{
+              //   maxWidth: "1000px",
+              // }}
             >
-              <Row className="mt-2 ">
+              <Row className="m-0 p-0 mt-2 w-100">
                 <Col md={1}></Col>
                 <Col md={5} className="p-0 ">
                   {noClasses ? (
-                    <div className="bgw rounded-3 ps-3 py-3 boxshadow mx-2 mb-2">
+                    <div className="bgw rounded-3 ps-1 py-1 boxshadow  mx-2 mb-2">
                       {showclasses === false && (
                         <>
                           {timer ? (
@@ -488,10 +488,17 @@ const Profile = () => {
                     </Collapse>
                   </div>
                 </Col>
-                <Col md={5} className="p-0  mb-4">
+                <Col md={5} className="p-0 abcd mb-4"
+                  // style={{
+                  //   height:"60vw",
+                  // }}
+                >
                   {/* <h1 className="profilename gx p-3 pb-1 ps-4">Feeds Section</h1> */}
 
-                  <div className=" pt-1 ">
+                  <div className=" pt-1 " style={{
+                            overflowY: "scroll",
+                            width:"100%" 
+                          }}>
                     {courseList.length > 0 &&
                       // eslint-disable-next-line
                       courseList.map((course, index) => {
@@ -522,12 +529,17 @@ const Profile = () => {
                           ) {
                             return (
                               <div
-                                className="mb-4 bgw rounded-3 p-3 ps-2 ms-1 me-2  boxshadow"
+                                className="mb-4 bggrey rounded-5  ms-1 me-2  boxshadow pt-2"
+                                style={{
+                                  width: "90vh",
+                                  height: "90vh"
+                                }}
+
                                 key={index}
                               >
-                                <Row className=" ">
+                                <Row className="w-150 p-0">
                                   <Col md={8}>
-                                    <div className="d-flex">
+                                    <div className="d-flex w-100">
                                       {/* <img
                                     src={
                                       host
@@ -539,23 +551,39 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   /> */}
-                                      <div>
-                                        <h5 className="ps-3">{course.title}</h5>
+                                      <div className="d-flex justify-content-between w-100  ">
+                                        <h5 className="ps-3 pt-2">{course.title}</h5>
+                                        <Link to={`/trainer/${course.host_details.id}`} className="d-flex align-items-center">
+                                        <div className="me-4 black mb-1"> 
+                                          {course.host_details.first_name} {course.host_details.last_name}
+                                        </div>
+                                        <p><img 
+                                          src={course.host_details.img_thumbnail}  
+                                          width={50}
+                                          height={50}
+                                          style={{
+                                            borderRadius: "50%",
+                                          }} 
+                                        alt="Profile Pic" />
+                                        </p>
+                                        </Link>
                                       </div>
                                     </div>
                                   </Col>
                                 </Row>
-                                <Link to={`/classes/join/${course.id}`}>
-                                  <Row className="d-flex justify-content-center bgw m-0 p-0 ">
+                                <Link to={`/classes/join/${course.id}`} className="w-100">
+                                  <div className="d-flex w-100 bggrey m-0 p-0 ">
                                     <img
                                       src={a[0]}
                                       alt=""
-                                      className="ms-1"
+                                      className=""
                                       style={{
                                         width: "100%",
+                                        height:"70vh" ,
+                                        "object-fit": "cover",
                                       }}
                                     />
-                                  </Row>
+                                  </div>
                                 </Link>
                                 <Row className="mt-2">
                                   {/* <Col md={1}></Col> */}
@@ -599,8 +627,8 @@ const Profile = () => {
                                           color:
                                             reaction.length > 0 &&
                                             reaction[index].heart
-                                              ? "orange"
-                                              : "gray",
+                                              ? "red"
+                                              : "grey",
                                         }}
                                       />
                                       <FaRegComment
@@ -608,7 +636,7 @@ const Profile = () => {
                                         className="cp ps-1"
                                       />
                                     </div>
-                                    <div className="ps-2 text-muted pt-1">
+                                    <div className="ps-2 text-muted pt-1 me-4">
                                       {reaction.length > 0 &&
                                       reaction[index].count > 0
                                         ? reaction[index].count +
@@ -631,7 +659,7 @@ const Profile = () => {
           </Container>
         </>
       )}
-      <Footer feeds="true" />
+      <Footer  />
     </Container>
   );
 };

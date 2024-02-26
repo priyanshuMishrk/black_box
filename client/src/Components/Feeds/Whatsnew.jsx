@@ -35,7 +35,7 @@ const Whatsnew = () => {
   return (
     <Container
       fluid
-      className="profilediv d-flex justify-content-center p-0 m-0 bgw boxshadow my-1"
+      className="profilediv d-flex justify-content-center p-0 m-0 bggrey  my-1 bxsh"
     >
       <Container className="pc py-5 pb-0">
         <Row>
@@ -204,16 +204,18 @@ const Whatsnew = () => {
                             className="cp"
                           >
                             <div
-                              className="boxshadow rounded-5 mb-2"
+                              className="boxshadow rounded-2 mb-2"
                               style={{
-                                width: "155px",
+                                width: "200px",
+                                overflow: "hidden",
+                                
                               }}
                             >
                               <div className="profileclassesimg">
                                 <img src={a[0]} className="classesimg" alt="" />
                               </div>
                               <Row
-                                className="profilest bw m-0 "
+                                className="profilest bw m-0 p-0 "
                                 style={{
                                   overflowY: "hidden",
                                 }}
@@ -225,14 +227,24 @@ const Whatsnew = () => {
                                   }}
                                 >
                                   <div
-                                    className=" w-75 ms-1 pt-1"
+                                    className="w-100 pt-1 d-flex  align-items-center newClass"
                                     style={{
                                       margin: "auto",
                                     }}
                                   >
-                                    <b>
+
+                                    <div className="m-1">
+                                      <img src={course.host_details.img_thumbnail} alt="Profile Pic" 
+                                      width={35}
+                                      height={35}
+                                      style={{
+                                        borderRadius: "50%",
+                                      }}/>
+                                    </div>
+
+                                    <b style={{ textTransform: 'uppercase', color: '#a1a0a0 !important'}} className="overflow-ellipsis">
                                       <p
-                                        className="gx pb-1 text-dark"
+                                        className="gx   info-text-title"
                                         style={{
                                           margin: "auto",
                                         }}
@@ -242,6 +254,14 @@ const Whatsnew = () => {
                                             ? course.title.slice(0, 20) + "..."
                                             : course.title
                                           : ""}
+                                      </p>
+                                      <p
+                                        className="gx pb-1 info-text-name"
+                                        style={{
+                                          margin: "auto",
+                                        }}
+                                      >
+                                        {course.host_details && course.host_details.first_name && course.host_details.last_name ? `${course.host_details.first_name} ${course.host_details.last_name}` : ""}
                                       </p>
                                     </b>
                                   </div>

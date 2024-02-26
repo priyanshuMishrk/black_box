@@ -68,7 +68,7 @@ const Avatarr = () => {
                   <Avatar src={propic} />
                 </>
               ) : (
-                <Avatar sx={{ width: 32, height: 32 }}>
+                <Avatar sx={{ width: 30, height: 30 }}>
                   {name[0].toUpperCase()}
                 </Avatar>
               )
