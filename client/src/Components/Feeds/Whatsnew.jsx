@@ -172,7 +172,7 @@ const Whatsnew = () => {
           <Col lg={7} className="ps-4 ">
             <h1 className="profilename gx">What's new</h1>
             <div
-              className="d-flex w-100 abc"
+              className="d-flex w-85 abc"
               style={{
                 overflowX: "scroll",
               }}

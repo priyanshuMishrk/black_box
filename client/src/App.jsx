@@ -37,6 +37,7 @@ import Trainer from "./Pages/Classes/Trainer";
 import Edit from "./Pages/Login/Edit";
 import EditCourse from "./Pages/Classes/EditCourse";
 import TabPanel2 from "./Pages/Profile/TabPanel";
+import BasicTabs from "./Pages/Profile/FriendsTabPanel";
 import Change from "./Pages/Login/Change";
 import Social from "./Pages/Login/Social";
 // import ClassroomLogin from "./Components/Classroom/Login";
@@ -68,7 +69,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit/profile" element={<Edit />} />
                 <Route path="/edit/course/:id" element={<EditCourse />} />
-                <Route path="/myclasses" element={<TabPanel2 />} />
+                <Route path="/myclasses" element={<BasicTabs />} />
               </Route>
               <Route path="/host" element={<Host />} />
               <Route path="/host/2" element={<Host2 />} />

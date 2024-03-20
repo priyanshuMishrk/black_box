@@ -67,6 +67,7 @@ app.use("/api", require("./routes/users.routes"));
 app.use("/api", require("./routes/courses.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 app.use("/api", require("./routes/classroom.routes"));
+app.use("/api",require("./routes/comments.routes"))
 // app.use("/meeting", require("./server"));
 // app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
@@ -89,7 +90,7 @@ app.use((err, req, res, next) => {
 //The listner...
 debugger;
 try {
-  const PORT = process.env.PORT || 3001;
+  const PORT = process.env.PORT || 3002;
   app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
 } catch (err) {
   console.log(err.message);

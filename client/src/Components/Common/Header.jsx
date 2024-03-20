@@ -56,8 +56,8 @@ const Header = () => {
                   {/* <li>
                     {user ? (
                       (user.classroom_id || workspaceAllow) && ( */}
-                  { !isInputVisible && <Link to="/main" className={navb?"link":"link2 "}>
-                    STREAM{" "}
+                  { !isInputVisible && <Link to="/host" className={navb?"link":"link2 "}>
+                  HOST A CLASS
                   </Link>}
                   {/* )
                     ) : (
@@ -82,19 +82,19 @@ const Header = () => {
                         }
                       </li>
 
-                      {/* <Link to="/classroom" className="link m-3">
-                        CLASSROOM{" "}
-                      </Link> */}
+                      <Link to="/classroom" className={navb?"link clr":"link2 clr"}>
+                        CLASSROOM
+                      </Link>
 
                       <li>
                         {!isInputVisible && <Link
-                          to="/host"
+                          to="/main"
                           className={navb?"link pe-3":"link2 pe-3"}
                           onClick={() => {
                             setToChoose(true);
                           }}
                         >
-                          HOST A CLASS
+                          STREAM
                         </Link>}
                       </li>
                       <li>

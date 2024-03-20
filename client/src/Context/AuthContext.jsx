@@ -10,10 +10,10 @@ import {} from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3002/api";
 export const dDomain = "https://test-blackis.dolphinvc.com/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -110,6 +110,53 @@ export const AuthProvider = ({ children }) => {
   const [willBeFrnd, setWillBeFrnd] = useState([]);
   const [areFriends, setAreFriends] = useState([]);
   const [acceptngFrnd, setAcceptngFrn] = useState([]);
+
+  const [comments, setComments] = useState([]);
+
+  //Comments
+  const getComments = async (id) => {
+    try {
+      const res = await axios.get(BaseUrl + '/comments', {
+        headers: { Authorization: `Bearer ${authTokens}` },
+        data: { id: id }, // Sending the id in the request body
+      });
+      if (res.status === 200) {
+        setComments(() => [...res.data.result]);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const deleteComments = async (id) => {
+    try {
+      const res = await axios.delete(BaseUrl + '/comments', {
+        headers: { Authorization: `Bearer ${authTokens}` },
+        data: { id: id }, // Sending the id in the request body
+      });
+      if (res.status === 200) {
+        return true
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const postComments = async (data) => {
+    try {
+      console.log("jj")
+      const res = await axios.post(BaseUrl + '/comments', {
+        // headers: { Authorization: `Bearer ${authTokens}` },
+        data
+      });
+      console.log("res : ", res)
+      if (res.status === 200) {
+        return true
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   //Friendship>>>
   const willFrnd = async () => {
@@ -1374,6 +1421,10 @@ export const AuthProvider = ({ children }) => {
   const [batch, setBatch] = useState("");
 
   const contextData = {
+    postComments,
+    deleteComments,
+    getComments,
+    comments,
     editClass,
     scollToRef,
     deleteCourse,

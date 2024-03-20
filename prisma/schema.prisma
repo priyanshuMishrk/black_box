@@ -35,6 +35,8 @@ model Users {
   Classroom_Course Classroom_Course[]
   Friends          Friends[]
   Friends_Peer     Friends_Peer[]
+  Comments         Comments[]
+  CommentRecatcion CommentReaction[]
 }
 
 model Classroom {
@@ -73,6 +75,7 @@ model Classroom_Course {
   // Gift            Gift[]
   // Suggest         Suggest[]
   Reactions    Reactions[]
+  // CommentReaction CommentRecatcion[]
 }
 
 model Course {
@@ -101,6 +104,7 @@ model Course {
   Gift            Gift[]
   Suggest         Suggest[]
   Reactions       Reactions[]
+  Comments        Comments[]
 }
 
 model Classes {
@@ -179,6 +183,7 @@ model Friends {
   friend       Users          @relation(fields: [friend_id], references: [id])
   created_at   DateTime       @default(now())
   Friends_Peer Friends_Peer[]
+  // Comments Comments[]
 }
 
 model Friends_Peer {
@@ -187,4 +192,26 @@ model Friends_Peer {
   peer_id      Int
   my_details   Users   @relation(fields: [my_id], references: [id])
   connect_frnd Friends @relation(fields: [peer_id], references: [id])
+}
+
+
+model Comments {
+  id               Int               @id @default(autoincrement())
+  post_id          Int?              @default(0)
+  post_details     Course?           @relation(fields: [post_id], references: [id])
+  user_id          Int               @default(0)
+  user             Users             @relation(fields: [user_id], references: [id])
+  comment_body     String            @default("")
+  reply            Boolean           @default(false)
+  reply_to         Int               @default(0)
+  edited           Boolean           @default(false)
+  CommentRecatcion CommentReaction[]
+} 
+
+model CommentReaction {
+  id               Int               @id @default(autoincrement())
+  user_id          Int
+  user             Users             @relation(fields: [user_id], references: [id])
+  react_to         Int
+  react            Comments             @relation(fields: [react_to], references: [id])
 }

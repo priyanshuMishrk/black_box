@@ -236,6 +236,7 @@ const Host = () => {
                       setShowCropper(true);
                     }}
                     accept=".jpg,.jpeg,.png,"
+                    required
                   />
                   {image.length !== 0 ? (
                     <label htmlFor="upload_image">

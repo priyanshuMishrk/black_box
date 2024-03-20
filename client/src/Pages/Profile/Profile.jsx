@@ -16,9 +16,11 @@ import { FaRegComment } from "react-icons/fa";
 import {} from "@mui/material/styles";
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
+import { FaArrowRight } from "react-icons/fa";
 
 import { CardActions, CardContent, CardMedia } from "@mui/material";
 import { GiShakingHands, GiThreeFriends } from "react-icons/gi";
+import Popup from "../../Components/Profile/Friends";
 
 const Profile = () => {
   const {
@@ -45,6 +47,8 @@ const Profile = () => {
     acceptngFrnd,
     acceptFrnd,
     dismissFrnd,
+    postComments,
+    getComments
   } = useContext(AuthContext);
   // const { successToast, errorToast } = useContext(StyleContext);
 
@@ -62,6 +66,8 @@ const Profile = () => {
     setExpanded2(!expanded2);
   };
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const [timer, setTimer] = useState(true);
 
   const expiryTime = useRef();
@@ -73,8 +79,32 @@ const Profile = () => {
   });
   const navigate = useNavigate();
 
+  const [comment, setComment] = useState('');
+
+  const handleInputChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const handleSubmit = (arg) => (e) => {
+    e.preventDefault();
+
+    // Form the body with the comment and post ID
+    const body = {
+      post_id: arg,
+      comment_body: comment,
+    };
+    postComments(body)
+  };
+
   useEffect(() => {
     (async () => {
+      if (showPopup){
+        
+      }
       setSeenavs(false);
       if (!user.classroom_id) {
         await getWorkSpaceAllow(user.email);
@@ -150,7 +180,7 @@ const Profile = () => {
             >
               <Row className="m-0 p-0 mt-2 w-100">
                 <Col md={1}></Col>
-                <Col md={5} className="p-0 ">
+                <Col md={5} className="p-0  friClColumn">
                   {noClasses ? (
                     <div className="bgw rounded-3 ps-1 py-1 boxshadow  mx-2 mb-2">
                       {showclasses === false && (
@@ -277,11 +307,11 @@ const Profile = () => {
                     ""
                   )}
 
-                  <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow mx-2">
+                  <div className="mt-2 rounded-3 bgw pe-0 mx-2 classDiv">
                     <h2 className="gl">My Classes</h2>
                     <img
                       src={Classes}
-                      className=" p-0 m-0 w-75 cp"
+                      className=" p-0 m-0 cp classPic"
                       alt=""
                       onClick={() => {
                         setShowclasses(true);
@@ -293,14 +323,14 @@ const Profile = () => {
                       // reactCourse
                     />
                   </div>
-                  <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow mx-2">
+                  <div className="mt-5 rounded-3 bgw  pe-0 classDiv mx-2">
                     <h2 className="gl">My Friends</h2>
                     <CardMedia
                       component="img"
                       // height="194"
                       image={Classes}
                       alt="My Friends"
-                      className=" p-0 m-0 w-75"
+                      className=" p-0 m-0 classPic"
                       style={{
                         borderRadius: "15px",
                       }}
@@ -328,7 +358,8 @@ const Profile = () => {
                         aria-label="show more"
                       ></GiThreeFriends>
                     </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    {expanded && <Popup isOpen={expanded} togglePopup={handleExpandClick} />}
+                    {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
                       <CardContent>
                         {areFriends.length > 0 &&
                           areFriends.map((option2) => {
@@ -404,7 +435,7 @@ const Profile = () => {
                           </p>
                         )}
                       </CardContent>
-                    </Collapse>
+                    </Collapse> */}
                     <Collapse in={expanded2} timeout="auto" unmountOnExit>
                       <CardContent>
                         {acceptngFrnd.length > 0 ? (
@@ -487,17 +518,49 @@ const Profile = () => {
                       </CardContent>
                     </Collapse>
                   </div>
+                  <div className="mt-5 profileInputAre gx">
+                    <span>suggest your friend</span>
+                    <div className="input-with-arrow gl">
+                        <input
+                          type="text"
+                          // value={inputValue}
+                          // onChange={handleChange}
+                          placeholder="Enter text..."
+                        />
+                        <button onClick={()=>{
+                            console.log("working on this");
+                          }} className="buttonForInputPJX gl"><FaArrowRight size={35}/> 
+                        </button>
+                    </div>
+                  </div>
+                  <div className="mt-5 profileInputAre gx">
+                    <span>gift to friend</span>
+                    <div className="input-with-arrow gl">
+                        <input
+                          type="text"
+                          // value={inputValue}
+                          // onChange={handleChange}
+                          placeholder="Enter text..."
+                        />
+                        <button onClick={()=>{
+                          console.log("nothing function")
+                        }} className="buttonForInputPJX gl"><FaArrowRight size={35}/> 
+                        </button>
+                    </div>
+                  </div>
+
+                  <button className="profileJoiner mt-5 gl"> JOIN A CLASS</button>
                 </Col>
-                <Col md={5} className="p-0 abcd mb-4"
+                <Col md={5} className="p-0 abcd mb-4 scrolly"
                   // style={{
                   //   height:"60vw",
                   // }}
                 >
                   {/* <h1 className="profilename gx p-3 pb-1 ps-4">Feeds Section</h1> */}
 
-                  <div className=" pt-1 " style={{
-                            overflowY: "scroll",
-                            width:"100%" 
+                  <div className=" pt-1" style={{
+                            // overflowY: "scroll",
+                            width:"99% " 
                           }}>
                     {courseList.length > 0 &&
                       // eslint-disable-next-line
@@ -529,16 +592,16 @@ const Profile = () => {
                           ) {
                             return (
                               <div
-                                className="mb-4 bggrey rounded-5  ms-1 me-2  boxshadow pt-2"
+                                className="mb-4 bggrey rounded-5  ms-1 me-2 pt-2 w-100 scrollyHeighty"
                                 style={{
-                                  width: "90vh",
-                                  height: "90vh"
+                                  // width: "90vh",
+                                  // height: "90vh"
                                 }}
 
                                 key={index}
                               >
-                                <Row className="w-150 p-0">
-                                  <Col md={8}>
+                                <Row className="w-100 p-0 checker3">
+                                  <Col md={8} className="w-100 d-flex alignt-items-center">
                                     <div className="d-flex w-100">
                                       {/* <img
                                     src={
@@ -551,10 +614,10 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   /> */}
-                                      <div className="d-flex justify-content-between w-100  ">
-                                        <h5 className="ps-3 pt-2">{course.title}</h5>
+                                      <div className="d-flex justify-content-between w-100 align-items-center ">
+                                        <h5 className="ps-3 pt-2 hostDetailTextPar gl">{course.title}</h5>
                                         <Link to={`/trainer/${course.host_details.id}`} className="d-flex align-items-center">
-                                        <div className="me-4 black mb-1"> 
+                                        <div className="me-4 black mb-1 hostDetailText gx"> 
                                           {course.host_details.first_name} {course.host_details.last_name}
                                         </div>
                                         <p><img 
@@ -571,7 +634,7 @@ const Profile = () => {
                                     </div>
                                   </Col>
                                 </Row>
-                                <Link to={`/classes/join/${course.id}`} className="w-100">
+                                <Link to={`/classes/join/${course.id}`} className=" heightExtender w-100">
                                   <div className="d-flex w-100 bggrey m-0 p-0 ">
                                     <img
                                       src={a[0]}
@@ -579,13 +642,13 @@ const Profile = () => {
                                       className=""
                                       style={{
                                         width: "100%",
-                                        height:"70vh" ,
+                                        height:"36.984vw" ,
                                         "object-fit": "cover",
                                       }}
                                     />
                                   </div>
                                 </Link>
-                                <Row className="mt-2">
+                                <Row className="">
                                   {/* <Col md={1}></Col> */}
                                   {/* <Col
                                 md={5}
@@ -608,7 +671,7 @@ const Profile = () => {
                               </Col> */}
                                   <Col
                                     md={12}
-                                    className="d-flex justify-content-between ps-4 "
+                                    className="d-flex justify-content-between ps-4"
                                   >
                                     {/* <div >
                                   {reaction.length > 0 &&
@@ -616,13 +679,14 @@ const Profile = () => {
                                     ? reaction[index].count
                                     : " "}
                                 </div> */}
-                                    <div>
+                                    <div className="d-flex">
+                                      <span>
                                       <AiFillHeart
                                         className="cp"
                                         onClick={() => {
                                           triggerReaction(index, course.id);
                                         }}
-                                        size={30}
+                                        size={40}
                                         style={{
                                           color:
                                             reaction.length > 0 &&
@@ -632,11 +696,33 @@ const Profile = () => {
                                         }}
                                       />
                                       <FaRegComment
-                                        size={27}
-                                        className="cp ps-1"
+                                        size={40}
+                                        className="cp ps-2"
+                                        onClick={togglePopup}
                                       />
-                                    </div>
-                                    <div className="ps-2 text-muted pt-1 me-4">
+                                      </span>
+                                      <div className="comment-box-container">
+                                          {showPopup && (
+                                            <div className="popup">
+                                              <div className="popup-content">
+                                                <span className="close" onClick={togglePopup}>&times;</span>
+                                                <form onSubmit={handleSubmit(course.id)}>
+                                                  <textarea
+                                                    placeholder="Enter your comment..."
+                                                    value={comment}
+                                                    onChange={handleInputChange}
+                                                    rows={4}
+                                                    cols={50}
+                                                  />
+                                                  <br />
+                                                  <button type="submit" className="gx">Comment</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          )}
+                                      </div>
+                                      </div>
+                                    <div className="ps-2 text-muted pt-1 me-4 likeCommText">
                                       {reaction.length > 0 &&
                                       reaction[index].count > 0
                                         ? reaction[index].count +
