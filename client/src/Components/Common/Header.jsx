@@ -86,17 +86,14 @@ const Header = () => {
                         CLASSROOM
                       </Link>
 
-                      <li>
+                      {/* <li>
                         {!isInputVisible && <Link
-                          to="/main"
+                          to="/stream"
                           className={navb?"link pe-3":"link2 pe-3"}
-                          onClick={() => {
-                            setToChoose(true);
-                          }}
                         >
                           STREAM
                         </Link>}
-                      </li>
+                      </li> */}
                       <li>
                       <div className={`ms-2 pt-1 d-flex ${isInputVisible ? 'searchdiv bggrey' : ''}`}>
                         {isInputVisible && (

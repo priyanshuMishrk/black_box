@@ -48,6 +48,11 @@ import Hostclassroom from "./Components/Classroom/Hostclassroom";
 import UImeeting from "./integration/UImeeting";
 import UIjoinmeeting from "./integration/UIjoinmeeting";
 import AdminLogin from "./Pages/Admin/Login";
+// import Streaming from "./Pages/Streaming/Streampage"
+import ClassesOnGoing from "./Pages/Classes/ClaasesGoing";
+import Streaming from "./Pages/Streaming/OngoingStream";
+import Room from "./Pages/Streaming/Room";
+import Joins from "./Pages/Streaming/Audience";
 
 function App() {
   return (
@@ -58,7 +63,11 @@ function App() {
             <ToastContainer />
             <Routes>
               {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/join/:roomid" element={<Joins/>}/>
+              <Route path="/streaming" element={<Streaming/>}/>
+              <Route path="/room/:roomid" element={<Room/>}/>
               <Route path="/" element={<Enter />} />
+              <Route path="/123308" element={<ClassesOnGoing />} />
               <Route path="/main" element={<Main />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/host" element={<Choose />} />
@@ -102,7 +111,7 @@ function App() {
               <Route path="/otplogin" element={<Otp />} />
               <Route path="/otpverify" element={<OtpVerify />} />
               <Route path="/change-password" element={<Change />} />
-
+              {/* <Route path="/stream" element={<Streaming />} /> */}
               <Route path="/signup" element={<Registration />} />
               <Route path="/social/:subUrl" element={<Social />} />
               <Route path="/meeting" element={<UImeeting />} />

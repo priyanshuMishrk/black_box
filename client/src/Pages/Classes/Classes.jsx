@@ -75,7 +75,7 @@ const Classes = () => {
 
   return (
     <Container fluid className="p-0 m-0 bggrey">
-      <Header />
+      <Header />  
       <Container fluid className="p-0 m-0 white"></Container>
       <Container fluid className="mb-5 m-0 p-0 bggrey">
         <Container fluid className="p-0 m-0 d-flex justify-content-center classescontainer w-100">

@@ -1391,3 +1391,59 @@ background-color: #000000;
 .clr{
   margin-right: 3vw;
 }
+
+.mt-10{
+  margin-top: 7vw !important;
+}
+
+#liveText{
+  color: white !important;
+  background-color: red !important;
+  margin-top: -30vw;
+  margin-left: -14.5vw;
+  width: 6vw;
+  font-weight: 900;
+  border-radius: 0.3vw;
+  font-size: 1.5vw;
+  
+}
+
+.imgInClass{
+    width: 80vw;
+    margin-left: 9vw;
+    margin-top: 8vw;
+    margin-bottom: 3vw;
+}
+
+.ongoinclass{
+  background-color:#f7f7f7 !important;
+}
+
+.rating{
+  margin-top: -3VW;
+  width: 25%;
+  margin-left: 64%;
+}
+
+.textRate{
+  background-color: black;
+  height: 3vw;
+  color: white; 
+  text-align: center;
+  padding-top: 0.5vw;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+}
+
+/* .afterRating{
+  content: '';
+  height: 1vw !important;
+  background-color: white !important;
+  display: block !important;
+  position: inherit;
+} */
+
+.myCallContainer{
+  margin-top: 8vw;
+  margin-left: 10vw;
+}

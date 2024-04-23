@@ -83,7 +83,7 @@ const Profile = () => {
 
   const handleInputChange = (e) => {
     setComment(e.target.value);
-  };
+  };  
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -100,10 +100,14 @@ const Profile = () => {
     postComments(body)
   };
 
+  const getComment = () => {
+
+  }
+
   useEffect(() => {
     (async () => {
       if (showPopup){
-        
+        getComments()
       }
       setSeenavs(false);
       if (!user.classroom_id) {

@@ -12,6 +12,7 @@ import { useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 import AlertDialog from "./AlertDialog";
 import { Link, useNavigate } from "react-router-dom";
+import "../../style1.css"
 
 function TabPanel(props) {
   const { children, setShowclasses, value, index, ...other } = props;
@@ -95,8 +96,8 @@ export default function BasicTabs() {
                 justifyContent: "center",
               }}
             >
-              <Tab label="Students" {...a11yProps(0)} />
-              <Tab label="Teacher" {...a11yProps(1)} />
+              <Tab label="Joined By You" {...a11yProps(0)} />
+              <Tab label="Hosted by you" {...a11yProps(1)} />
               <Tab
                 label="X"
                 onClick={() => setShowclasses(false)}
@@ -114,16 +115,16 @@ export default function BasicTabs() {
                   const a = JSON.parse(item.images);
 
                   return (
-                    <Col md={4} key={index}>
-                      <Row className="my-3 w-100 bs">
+                    <Col key={index}>
+                      <Row className="my-3 w-50 bs teacherClasses">
                         <Col xs={9}>
-                          <Row>
+                          <Row className="tcrow">
                             <Col xs={4}>
                               <Link to={`/classes/join/${item.id}`}>
                                 <img
                                   src={a[0]}
                                   alt="classes"
-                                  className="w-100"
+                                  className="climg"
                                 />
                               </Link>
                             </Col>
@@ -133,23 +134,20 @@ export default function BasicTabs() {
                         <h5>Number of classes : {item.Classes.length} </h5>
                         <h5>Participants : {item.Participants.length}</h5>
                       </Col> */}
-                            <Col xs={8} className=" align-content-center">
-                              <h6>
-                                Instructor :<b> You</b>
-                              </h6>
-                              <h6>
+                            <Col xs={9} className=" align-content-center tclasstxt w-100">
+                              <h6 className="gl">
                                 Title :{" "}
-                                <b>
-                                  {item.title.length > 20
+                                <b className="gx">
+                                  {item.title.length > 40
                                     ? item.title.slice(0, 40) + "..."
                                     : item.title}
                                 </b>
                               </h6>
-                              <h6>
-                                Classes : <b>{item.Classes.length}</b>
+                              <h6 className="gl">
+                                Classes : <b className="gx">{item.Classes.length}</b>
                               </h6>
-                              <h6>
-                                Participants : <b>{item.Participants.length}</b>
+                              <h6 className="gl">
+                                Participants : <b className="gx">{item.Participants.length}</b>
                               </h6>
                             </Col>
                           </Row>
