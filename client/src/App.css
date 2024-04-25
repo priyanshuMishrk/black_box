@@ -1434,16 +1434,3 @@ background-color: #000000;
   border-top-left-radius: 1vw;
   border-top-right-radius: 1vw;
 }
-
-/* .afterRating{
-  content: '';
-  height: 1vw !important;
-  background-color: white !important;
-  display: block !important;
-  position: inherit;
-} */
-
-.myCallContainer{
-  margin-top: 8vw;
-  margin-left: 10vw;
-}

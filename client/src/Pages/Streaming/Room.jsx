@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
-import ImageSlider from "../../Components/Home/ImageSliderStream";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-
+import Logo from "../../blackbox-logo-01.png";
 const Room = () => {
     function randomID(len) {
         let result = '';
@@ -23,7 +21,7 @@ const Room = () => {
     const {roomid} = useParams()
 
     let myMeeting = async (element) => {
-
+      const role = ZegoUIKitPrebuilt.Host;
         const appID = 1145153958;
       const serverSecret = "b4a5abb018a8a680858acdd6b1200119";
       const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomid,  randomID(5),  randomID(5));
@@ -34,14 +32,20 @@ const Room = () => {
         container: element,
         scenario: {
           mode: ZegoUIKitPrebuilt.LiveStreaming, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
+          config: {
+            role,
+          },
+        },
+        showRemoveUserButton : true,
+        branding : {
+          logoURL: Logo
         },
         sharedLinks: [
             {
               name: 'CopyLink',
               url:
                window.location.protocol + '//' + 
-               window.location.host + window.location.pathname +
-                '?roomID=' +
+               window.location.host + "/join/" +
                 roomid,
             },
           ]
@@ -49,12 +53,10 @@ const Room = () => {
 
     }
 
-
     return (<>
-    <Header/>
     <div className="myCallContainer gl"
       ref={myMeeting}
-      style={{ width: '80vw', height: '80vh' }}></div>
+      style={{ width: '100vw', height: '100vh' }}></div>
     <Footer/>
     </>)
 }

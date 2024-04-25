@@ -36,7 +36,6 @@ import Choose from "./Pages/Classes/Choose";
 import Trainer from "./Pages/Classes/Trainer";
 import Edit from "./Pages/Login/Edit";
 import EditCourse from "./Pages/Classes/EditCourse";
-import TabPanel2 from "./Pages/Profile/TabPanel";
 import BasicTabs from "./Pages/Profile/FriendsTabPanel";
 import Change from "./Pages/Login/Change";
 import Social from "./Pages/Login/Social";
@@ -53,6 +52,9 @@ import ClassesOnGoing from "./Pages/Classes/ClaasesGoing";
 import Streaming from "./Pages/Streaming/OngoingStream";
 import Room from "./Pages/Streaming/Room";
 import Joins from "./Pages/Streaming/Audience";
+import ClassEnter from "./Pages/Classes/DemoClass";
+import StartClass from "./Pages/Classes/HostClass";
+import JoinClass from "./Pages/Classes/JoinClass";
 
 function App() {
   return (
@@ -66,6 +68,10 @@ function App() {
               <Route path="/join/:roomid" element={<Joins/>}/>
               <Route path="/streaming" element={<Streaming/>}/>
               <Route path="/room/:roomid" element={<Room/>}/>
+
+              <Route path="/class/join/:roomid" element={<JoinClass/>}/>
+              <Route path="/class/start" element={<ClassEnter/>}/>
+              <Route path="/class/host/:roomid" element={<StartClass/>}/>
               <Route path="/" element={<Enter />} />
               <Route path="/123308" element={<ClassesOnGoing />} />
               <Route path="/main" element={<Main />} />

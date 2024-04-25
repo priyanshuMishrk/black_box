@@ -1,36 +1,36 @@
 import React, { useState } from "react";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
-import ImageSlider from "../../Components/Home/ImageSliderStream";
-import { useNavigate, useParams } from "react-router-dom";
+import Logo from "../../blackbox-logo-01.png";
+import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 
 const Joins = () => {
-    function randomID(len) {
-        let result = '';
-        if (result) return result;
-        var chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP',
-          maxPos = chars.length,
-          i;
-        len = len || 5;
-        for (i = 0; i < len; i++) {
-          result += chars.charAt(Math.floor(Math.random() * maxPos));
-        }
-        return result;
-      }
-
-
-    const {roomid} = useParams()
+  function randomID(len) {
+    let result = '';
+    if (result) return result;
+    var chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP',
+    maxPos = chars.length,
+    i;
+    len = len || 5;
+    for (i = 0; i < len; i++) {
+      result += chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return result;
+  }
+  
+  const {roomid} = useParams()
     const role = ZegoUIKitPrebuilt.Audience;
 
     let myMeeting = async (element) => {
-
-        const appID = 1145153958;
+      console.log(345)
+      const appID = 1145153958;
       const serverSecret = "b4a5abb018a8a680858acdd6b1200119";
       const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomid,  randomID(5),  randomID(5));
-
-      const zp = ZegoUIKitPrebuilt.create(kitToken);
-
+      
+      var zp = ZegoUIKitPrebuilt.create(kitToken);
+    
+      
       zp.joinRoom({
         container: element,
         scenario: {
@@ -39,6 +39,10 @@ const Joins = () => {
             role,
           },
         },
+        branding : {
+          logoURL: Logo
+        },
+        showUserList: true,
         sharedLinks: [
             {
               name: 'CopyLink',
@@ -51,14 +55,25 @@ const Joins = () => {
           ]
       });
 
+    //   const intervalId = setInterval(async () => {
+    //     const number = await fetchUserCount(roomid);
+    //     console.log(number)
+    //     // setAudienceCount(number)
+    // }, 2000); // Update every 2 seconds
+
+  //   zp.on('customCommandReceived', (roomID, user, command, content) => {
+  //     if (command === 'audience_count') {
+  //         setAudienceCount(content); // Update audience count for everyone
+  //     }
+  // });
+    
+
     }
-
-
     return (<>
-    <Header/>
     <div className="myCallContainer gl"
       ref={myMeeting}
-      style={{ width: '80vw', height: '80vh' }}></div>
+      style={{ width: '100vw', height: '100vh' }}>
+      </div>
     <Footer/>
     </>)
 }
