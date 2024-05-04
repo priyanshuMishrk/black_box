@@ -10,10 +10,10 @@ import {} from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 export const dDomain = "https://test-blackis.dolphinvc.com/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -496,14 +496,14 @@ export const AuthProvider = ({ children }) => {
     // console.log(data);
     try {
       const uploaders = await imgsAlgo(image);
-      let dolphin = await callStartMeeting(data.title);
-      // console.log(dolphin, "from the classroom");
-      if (!dolphin.hasOwnProperty("web_client_uri")) {
-        dolphin = await callStartMeeting(data.title);
-      }
+      // let dolphin = await callStartMeeting(data.title);
+      // // console.log(dolphin, "from the classroom");
+      // if (!dolphin.hasOwnProperty("web_client_uri")) {
+      //   dolphin = await callStartMeeting(data.title);
+      // }
       const res = await axios.post(
         BaseUrl + "/classroom",
-        { ...data, images: uploaders, dolphin },
+        { ...data, images: uploaders },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
         },

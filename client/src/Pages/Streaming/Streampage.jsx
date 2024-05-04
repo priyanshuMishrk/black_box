@@ -7,7 +7,8 @@ const Streaming = () => {
     return (<>
     <Header/>
     <ImageSlider classname="mt-5"/>
-        <div>
+        <div className="StreamData gl">
+            No Stream Data to show yet
         </div>
     <Footer/>
     </>)

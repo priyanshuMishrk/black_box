@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d6c449a6.css",
-    "main.js": "/static/js/main.7d3658d6.js",
+    "main.css": "/static/css/main.01143c3c.css",
+    "main.js": "/static/js/main.7646bd06.js",
     "static/js/787.8518d7bc.chunk.js": "/static/js/787.8518d7bc.chunk.js",
     "static/media/carousel4.jpg": "/static/media/carousel4.8e6b6b69a2b5d9a251e2.jpg",
     "static/media/carousel3.jpg": "/static/media/carousel3.5a0fa49aafdc8a07369e.jpg",
@@ -12,12 +12,12 @@
     "static/media/Gilroy-Light.otf": "/static/media/Gilroy-Light.cc7ab55d27205bd64001.otf",
     "index.html": "/index.html",
     "static/media/youtube.svg": "/static/media/youtube.32d95c8d3ccf859b2c3dc9315b7786ca.svg",
-    "main.d6c449a6.css.map": "/static/css/main.d6c449a6.css.map",
-    "main.7d3658d6.js.map": "/static/js/main.7d3658d6.js.map",
+    "main.01143c3c.css.map": "/static/css/main.01143c3c.css.map",
+    "main.7646bd06.js.map": "/static/js/main.7646bd06.js.map",
     "787.8518d7bc.chunk.js.map": "/static/js/787.8518d7bc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6c449a6.css",
-    "static/js/main.7d3658d6.js"
+    "static/css/main.01143c3c.css",
+    "static/js/main.7646bd06.js"
   ]
 }

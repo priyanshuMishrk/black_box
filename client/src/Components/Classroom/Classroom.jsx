@@ -11,6 +11,8 @@ import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/classroomDefault.jpeg";
 import DefaultUserPic from "../../Images/defualtProPic.jpg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 // import { AiFillHeart } from "react-icons/ai";
 // import ReadMoreReact from "read-more-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -82,6 +84,27 @@ const Classroom = () => {
     }
   };
 
+  function addTime(timeString, minutesToAdd) {
+    // 1. Split the time string into hours and minutes
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // 2. Create a Date object 
+    const date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes);
+  
+    // 3. Add minutes
+    date.setMinutes(date.getMinutes() + parseInt(minutesToAdd));
+    console.log(date)
+  
+    // 4. Format as a time string
+    const newHours = date.getHours().toString().padStart(2, '0');
+    const newMinutes = date.getMinutes().toString().padStart(2, '0');
+  
+    return `${newHours}:${newMinutes}`;
+  }
+  
+
   useEffect(() => {
     // console.log(user.classroom_id, "the user from the classroom");
     window.scrollTo({
@@ -99,7 +122,7 @@ const Classroom = () => {
       {sub ? (
         <Container
           fluid
-          className="profilediv d-flex flex-column justify-content-center align-items-center bgw pb-5"
+          className="profilediv d-flex flex-column justify-content-center align-items-center pb-5"
         >
           {/* <Container className="pc py-5 pb-0"> */}
           {/* <Row className="d-flex flex-column justify-content-center align-items-center"> */}
@@ -166,8 +189,8 @@ const Classroom = () => {
               <Row>
                 <Col lg={1}></Col>
                 <Col lg={3}>
-                  <Row className="mb-4">
-                    {workSpace && user && workSpace.host === user.id ? (
+                  <Row className="mb-4 rowkl">
+                    {workSpace && user && workSpace.host !== user.id ? (
                       <Col
                         md={12}
                         className="d-flex justify-content-center align-items-center"
@@ -238,6 +261,14 @@ const Classroom = () => {
                         </div>
                       </Col>
                     )}
+                    <p className="workTitle gx">{workSpace && workSpace.title}</p>
+
+                    <div className="search-container">
+                      <button type="button" className="search-button gx">
+                      <FontAwesomeIcon className="yeicon" icon={faMagnifyingGlass} />
+                      </button>
+                      <input type="text" className="search-input gl" placeholder="Search here" />
+                    </div>
 
                     {workSpace && user && workSpace.host === user.id && (
                       <Col md={12}>
@@ -252,20 +283,20 @@ const Classroom = () => {
                             readMoreText=".. read more"
                           /> */}
                           {
-                            <div className=" mt-2">
-                              <Link to="/classroom/edit">
-                                <Button
-                                  variant="contained"
-                                  className="bggrey me-1 text-dark px-4 mb-1 mt-3"
-                                  style={{
-                                    height: "40px",
-                                    width: "160px",
-                                  }}
-                                >
-                                  Edit Profile
-                                </Button>
-                              </Link>
-                            </div>
+                            // <div className=" mt-2">
+                            //   <Link to="/classroom/edit">
+                            //     <Button
+                            //       variant="contained"
+                            //       className="bggrey me-1 text-dark px-4 mb-1 mt-3"
+                            //       style={{
+                            //         height: "40px",
+                            //         width: "160px",
+                            //       }}
+                            //     >
+                            //       Edit Profile
+                            //     </Button>
+                            //   </Link>
+                            // </div>
                           }
                           {/* {workSpace && user && workSpace.host === user.id && (
                             <div className=" mt-2">
@@ -333,9 +364,10 @@ const Classroom = () => {
                   lg={7}
                   className=" ps-4 mt-0 abc text-center px-0 d-flex row align-items-center"
                 >
-                  <h1 className="mt-4">{workSpace && workSpace.title}</h1>
-                  {workSpace && workSpace.description}{" "}
-                  <p className="pt-1 abc"></p>
+                  <p className="clromHead gx">CLASSROOM</p>
+                  {/* <h1 className="mt-4">{workSpace && workSpace.title}</h1> */}
+                  {/* {workSpace && workSpace.description}{" "} */}
+                  {/* <p className="pt-1 abc"></p> */}
                   {/* <div>People you know</div> */}
                   {/* <ReadMoreReact
                           text={workSpace && workSpace.description}
@@ -450,7 +482,7 @@ const Classroom = () => {
                 workSpace && workSpace.Users[0].last_name
               }`}
             > */}
-            <div className="m-0 mb-0 text-center">
+            {/* <div className="m-0 mb-0 text-center">
               {workSpace && user && user.img_thumbnail.length > 0 ? (
                 <img
                   src={user.img_thumbnail}
@@ -477,7 +509,7 @@ const Classroom = () => {
                 />
               )}
               <p className="mb-0 pt-2">You</p>
-            </div>
+            </div> */}
             {workSpace &&
               workSpace.Users.length > 1 &&
               workSpace.Users.map((ele, ind) => (
@@ -516,15 +548,14 @@ const Classroom = () => {
               ))}
             {/* </Tooltip> */}
           </Container>
-          <Container fluid className="p-1 m-1 bggrey"></Container>
           <Container
-            className=" pt-4"
+            className=" pt-4 bggrey"
             style={{
               maxWidth: "1500px",
             }}
           >
             <Row className="mt-2 ">
-              <Col lg={20} className="text-center mb-3">
+              <Col lg={20} className="text-center mb-3  gx">
                 <h1>UPCOMING SESSIONS</h1>
               </Col>
               <Col
@@ -543,17 +574,20 @@ const Classroom = () => {
                     } else {
                       a = DefaultPic;
                     }
+                    let id = course.id
                     // console.log(a, "the images");
-                    const day = new Date(course.Classes[0].date);
+                    // const day = new Date(course.Classes[0].date);
                     return (
                       <div
-                        className="my-4 mt-1 me-4 class"
+                        className=" class cp"
                         key={index}
-
+                        onClick={() => {
+                          navigate(`/classroom/join/${id}`);
+                      }}
                         // style={{ height: "200px" }}
                       >
                         <div
-                          className="boxshadow rounded-5 mb-1"
+                          className=" rounded-5 mb-1"
                           style={{
                             width: "220px",
                           }}
@@ -702,17 +736,39 @@ const Classroom = () => {
                                     }
                                   /> */}
                               {/* <p> */}
-                              {day.toLocaleDateString("default", {
+                              {/* {day.toLocaleDateString("default", {
                                 month: "short",
                               }) +
                                 " " +
-                                day.getDate() +
-                                " " +
+                                day.getDate() + */}
+                                <p>
+                                  Date :
+                                {(() => {
+                                  const month = ["Jan", "Feb" , "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov" , "Dec"]
+                                  console.log(course.Classes.length)
+                                  console.log(course.Classes.length > 1);
+                                  // if (course.Classes.length > 2) {
+                                  //   console.log("tt")
+                                  //   return `${new Date(course.Classes[0].date).getMonth()} ${ new Date(course.Classes[0].date).getDate()}, ${ new Date(course.Classes[1].date).getDate()}, ${ new Date(course.Classes[2].date).getDate()}`
+                                  // } else if (course.Classes.length > 1) {
+                                  //   return `${new Date(course.Classes[0].date).getMonth()} ${ new Date(course.Classes[0].date).getDate()} ,  ${ new Date(course.Classes[1].date).getDate()}`
+                                  // } else {
+                                  //   return `${new Date(course.Classes[0].date).getDate()}`
+                                  // }
+                                })()}
+                                </p>
+                               <p>
+                                {"Time :  " +
                                 course.Classes[0].time +
                                 ""}{" "}
-                              {course.Classes[0].duration + " minutes"}
+                              {/* {course.Classes[0].duration + " minutes"} */}
+                              -
+                              { addTime(course.Classes[0].time , course.Classes[0].duration)}
                               {/* </p> */}
                               {/* </ListItem> */}
+
+                               </p>
+                               
                             </div>
                           </Row>
                         </div>

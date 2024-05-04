@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef , useEffect, useState} from "react";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Logo from "../../blackbox-logo-01.png";
@@ -20,6 +20,7 @@ const JoinClass = () => {
   }
   
   const {roomid} = useParams()
+  const [shouldReload, setShouldReload] = useState(true);
     const role = ZegoUIKitPrebuilt.Audience;
 
     let myMeeting = async (element) => {
@@ -54,9 +55,18 @@ const JoinClass = () => {
             },
           ]
       });
-    
-
+      
     }
+    const myCallContainerRef = useRef(null);
+
+    useEffect(() => {
+        // Access the div element using the ref
+        const element = myCallContainerRef.current;
+
+        if (element) {
+            myMeeting(element);
+          }
+    }, []);
     return (<>
     <div className="myCallContainer gl"
       ref={myMeeting}

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import Logo from "../../blackbox-logo-01.png";
 const StartClass = () => {
+  const baseURL = window.location.origin; 
     function randomID(len) {
         let result = '';
         if (result) return result;
@@ -19,6 +20,9 @@ const StartClass = () => {
 
 
     const {roomid} = useParams()
+//     const container = document.querySelector('.myCallContainer');
+// console.log('Container Width:', container.clientWidth); 
+// console.log('Container Height:', container.clientHeight); 
 
     let myMeeting = async (element) => {
       const role = ZegoUIKitPrebuilt.Host;
@@ -26,7 +30,7 @@ const StartClass = () => {
       const serverSecret = "b4a5abb018a8a680858acdd6b1200119";
       const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomid,  randomID(5),  randomID(5));
 
-      const zp = ZegoUIKitPrebuilt.create(kitToken);
+      const zp = await ZegoUIKitPrebuilt.create(kitToken);
 
       zp.joinRoom({
         container: element,
@@ -40,6 +44,12 @@ const StartClass = () => {
         branding : {
           logoURL: Logo
         },
+        showTurnOffRemoteCameraButton : true,
+        showTurnOffRemoteMicrophoneButton : true,
+        whiteboardConfig: {
+          showAddImageButton: false, 
+          showCreateAndCloseButton: true 
+        },
         sharedLinks: [
             {
               name: 'CopyLink',
@@ -48,7 +58,11 @@ const StartClass = () => {
                window.location.host + "/join/" +
                 roomid,
             },
-          ]
+          ],
+          showLeavingView : false,
+          onLeaveRoom: () => {
+            window.location.href = `${baseURL}/profile`;  // Replace with your target URL 
+          }
       });
 
     }

@@ -683,6 +683,32 @@ const Join = () => {
                       </Button>
                     </div>
                   )}
+
+                  {(user &&
+                    user.id !== course.host &&
+                    !course.completion &&
+                    !mine) && <div>
+                      <Button className="bgdark text-light rounded-3 border border-1 mt-3 llii"
+                        onClick={() => {
+                            navigate(`/class/join/${id}`);
+                        }}
+                      >
+                        Join
+                      </Button>
+                    </div>}
+                    {(user &&
+                    user.id == course.host &&
+                    !course.completion &&
+                    !false) && <div>
+                      <Button className="bgdark text-light rounded-3 border border-1 mt-3 llii"
+                        onClick={() => {
+                            navigate(`/class/host/${id}`);
+                        }}
+                      >
+                        Host
+                      </Button>
+                    </div>}
+
                   <div className="mt-3 w-50 ms-2">
                     <Button
                       className="bgy border border-1  text-dark w-100 rounded-3"

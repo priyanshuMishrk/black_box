@@ -47,7 +47,7 @@ import Hostclassroom from "./Components/Classroom/Hostclassroom";
 import UImeeting from "./integration/UImeeting";
 import UIjoinmeeting from "./integration/UIjoinmeeting";
 import AdminLogin from "./Pages/Admin/Login";
-// import Streaming from "./Pages/Streaming/Streampage"
+import Streamings from "./Pages/Streaming/Streampage"
 import ClassesOnGoing from "./Pages/Classes/ClaasesGoing";
 import Streaming from "./Pages/Streaming/OngoingStream";
 import Room from "./Pages/Streaming/Room";
@@ -55,6 +55,9 @@ import Joins from "./Pages/Streaming/Audience";
 import ClassEnter from "./Pages/Classes/DemoClass";
 import StartClass from "./Pages/Classes/HostClass";
 import JoinClass from "./Pages/Classes/JoinClass";
+import StreamSt from "./Pages/Streaming/Stream";
+import CalendarIcon from "./Components/Classroom/Callendar";
+import ClassroomJoinForm from "./Components/Classroom/JoinClassroom";
 
 function App() {
   return (
@@ -68,6 +71,9 @@ function App() {
               <Route path="/join/:roomid" element={<Joins/>}/>
               <Route path="/streaming" element={<Streaming/>}/>
               <Route path="/room/:roomid" element={<Room/>}/>
+              <Route path="/stream" element={<StreamSt/>}/>
+
+              <Route path="/classroom/join/:id" element={<ClassroomJoinForm/>}/>
 
               <Route path="/class/join/:roomid" element={<JoinClass/>}/>
               <Route path="/class/start" element={<ClassEnter/>}/>
@@ -117,7 +123,7 @@ function App() {
               <Route path="/otplogin" element={<Otp />} />
               <Route path="/otpverify" element={<OtpVerify />} />
               <Route path="/change-password" element={<Change />} />
-              {/* <Route path="/stream" element={<Streaming />} /> */}
+              <Route path="/streams" element={<Streamings />} />
               <Route path="/signup" element={<Registration />} />
               <Route path="/social/:subUrl" element={<Social />} />
               <Route path="/meeting" element={<UImeeting />} />
@@ -126,6 +132,7 @@ function App() {
                 element={<UIjoinmeeting />}
               />
               <Route path="/api" element={<AdminLogin />} />
+              <Route path="/cal" element={<CalendarIcon/>}/>
             </Routes>
           </AuthProvider>
         </StyleProvider>
