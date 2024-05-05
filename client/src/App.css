@@ -1545,7 +1545,33 @@ background-color: #000000;
   margin-bottom: 1vw !important;
 }
 
-.calIcon {
-  width: 20vw;
-  height: 30vw;
+.calIcon svg{
+  width: 4vw !important;
+  height: 5vw !important;
+  margin-top: 1vw;
+  margin-right: 1vw;
+}
+
+.timeClrom{
+  margin-top: 1vw;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8vw !important;
+}
+
+.joinclrm{
+  background-color: #000;
+  color: #ffcc00;
+  outline: none;
+  border: none;
+  border-radius: 0.5vw;
+  margin-top: 0.5vw;
+  font-size: 1vw;
+  width: 8vw;
+}
+
+.brrrr{
+  border: 1px solid black;
+  border-radius: 1vw;
+  overflow: hidden;
 }

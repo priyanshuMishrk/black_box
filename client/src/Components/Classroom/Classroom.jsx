@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import StyleContext from "../../Context/StyleContext";
 // import { FaRegComment } from "react-icons/fa";
 // import { yellow } from "@mui/material/colors";
+import CalendarIcon from "./Callendar";
 
 const Classroom = () => {
   // const name = localStorage.getItem("name");
@@ -102,6 +103,15 @@ const Classroom = () => {
     const newMinutes = date.getMinutes().toString().padStart(2, '0');
   
     return `${newHours}:${newMinutes}`;
+  }
+  function checkPrimeTime(time){
+    const [hours, minutes] = time.split(":");
+
+const date = new Date();
+date.setHours(hours, minutes, 0); // Set hours and minutes
+
+const isAfterNoon = date.getHours() >= 12;
+return isAfterNoon
   }
   
 
@@ -579,7 +589,7 @@ const Classroom = () => {
                     // const day = new Date(course.Classes[0].date);
                     return (
                       <div
-                        className=" class cp"
+                        className=" class cp brrrr"
                         key={index}
                         onClick={() => {
                           navigate(`/classroom/join/${id}`);
@@ -649,6 +659,7 @@ const Classroom = () => {
                                     style={{
                                       borderRadius: "50%",
                                       objectFit: "cover",
+                                      marginLeft: "0.5vw"
                                     }}
                                     className=" mt-2"
                                     alt="logo"
@@ -696,7 +707,7 @@ const Classroom = () => {
                               </div>
                             </div>
                             <div
-                              className=" w-100 pb-2 text-dark"
+                              className=" w-100 pb-2 text-dark d-flex "
                               style={{
                                 overflowX: "hidden",
                                 overflowY: "hidden",
@@ -741,12 +752,16 @@ const Classroom = () => {
                               }) +
                                 " " +
                                 day.getDate() + */}
-                                <p>
-                                  Date :
+                                <p className='calIcon '>
                                 {(() => {
                                   const month = ["Jan", "Feb" , "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov" , "Dec"]
                                   console.log(course.Classes.length)
                                   console.log(course.Classes.length > 1);
+                                  const datels =  new Date(course.Classes[0].date).getDate()
+                                  const monthls = month[new Date(course.Classes[0].date).getMonth()]
+                                  return <CalendarIcon date={datels} month={monthls} 
+                                  />
+
                                   // if (course.Classes.length > 2) {
                                   //   console.log("tt")
                                   //   return `${new Date(course.Classes[0].date).getMonth()} ${ new Date(course.Classes[0].date).getDate()}, ${ new Date(course.Classes[1].date).getDate()}, ${ new Date(course.Classes[2].date).getDate()}`
@@ -757,18 +772,14 @@ const Classroom = () => {
                                   // }
                                 })()}
                                 </p>
-                               <p>
-                                {"Time :  " +
-                                course.Classes[0].time +
-                                ""}{" "}
-                              {/* {course.Classes[0].duration + " minutes"} */}
-                              -
-                              { addTime(course.Classes[0].time , course.Classes[0].duration)}
-                              {/* </p> */}
-                              {/* </ListItem> */}
-
+                               <p className="timeClrom gl">
+                                <span>Time :  </span>
+                                <span>{`${course.Classes[0].time}` + " " + (checkPrimeTime(course.Classes[0].time)?"PM" : "AM")} -
+                              {  addTime(course.Classes[0].time , course.Classes[0].duration) + " " + (checkPrimeTime(addTime(course.Classes[0].time , course.Classes[0].duration))?"PM" : "AM")}</span>
+                              
+                                <button className="joinclrm gx">JOIN</button>
                                </p>
-                               
+                              
                             </div>
                           </Row>
                         </div>
