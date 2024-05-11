@@ -29,6 +29,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
+app.use(express.static('public'));
+
 
 /////Related to social auth....
 app.use(cookieParser());

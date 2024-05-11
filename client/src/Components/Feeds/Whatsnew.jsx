@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { Autocomplete, Box, TextField, Typography } from "@mui/material";
 import ReadMoreReact from "read-more-react";
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Whatsnew = () => {
   const name = localStorage.getItem("name");
@@ -25,8 +27,22 @@ const Whatsnew = () => {
 
   const { getCoursesList, courseList, willFrnd, willBeFrnd, saveFrnd } =
     useContext(AuthContext);
+    const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollerRef = useRef(null);
 
-  useEffect(() => {
+  const handleScroll = (scrollOffset) => {
+    if (scrollerRef.current) {
+      const currentPosition = scrollerRef.current.scrollLeft; // Adjust according to your scroll direction
+      const newPosition = currentPosition + scrollOffset;
+      scrollerRef.current.scrollTo({
+        left: newPosition,
+        behavior: 'smooth',
+      });
+      setScrollPosition(newPosition);
+    }
+  };
+    
+    useEffect(() => {
     getCoursesList();
     willFrnd();
     // eslint-disable-next-line
@@ -77,8 +93,8 @@ const Whatsnew = () => {
                 </div>
               </Col>
               <Col md={12}>
-                <div className="text-center mt-2 ps-3">
-                  <h3>{name}</h3>
+                <div className="text-center mt-2 ps-3 gl">
+                  <h3 className="gsb">{name}</h3>
                   <ReadMoreReact
                     text={about}
                     min={150}
@@ -169,13 +185,22 @@ const Whatsnew = () => {
             </Row>
           </Col>
           <Col></Col>
+
+          {/* //// */}
           <Col lg={7} className="ps-4 ">
             <h1 className="profilename gx">What's new</h1>
+            <div className="scroll-container"
+            style={{
+              position : "relative"
+            }}
+            > 
+            {scrollPosition > 0 && <FontAwesomeIcon icon={faChevronLeft} onClick={() => handleScroll(-200)}  className="alllll"/>}
             <div
               className="d-flex w-85 abc"
               style={{
-                overflowX: "scroll",
+                overflowX: "hidden",
               }}
+              ref={scrollerRef}
             >
               {courseList
                 ? // eslint-disable-next-line
@@ -275,6 +300,10 @@ const Whatsnew = () => {
                   })
                 : ""}
             </div>
+            {scrollPosition < (scrollerRef.current?.scrollWidth - scrollerRef.current?.clientWidth) && (
+        <FontAwesomeIcon icon={faChevronRight} onClick={() => handleScroll(200)} className="arrrr" />
+      )}
+    </div>
           </Col>
           <Col lg={1}></Col>
         </Row>

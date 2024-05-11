@@ -187,7 +187,7 @@ router.get(
 //handler
 router.get("/protected", Users.signup);
 router.get("/failure", (req, res) => {
-  res.send("Failed to authenticate..");
+  res.send("Failed to authenticate.." , req);
 });
 
 module.exports = router;

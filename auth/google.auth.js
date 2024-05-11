@@ -11,6 +11,8 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
+      console.log("\n\n\n lettttttttttt \n\n")
+      console.log(request, accessToken, refreshToken, profile , done)
       // console.log(profile, ">>>", done);
       return done(null, profile);
     }

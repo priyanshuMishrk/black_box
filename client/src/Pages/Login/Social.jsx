@@ -15,10 +15,10 @@ function Social() {
 
   const profileNavigtr = (e) => {
     e.preventDefault();
-    windowsProp.current.close();
     axios
       .get(BaseUrl + "/socialuser")
       .then((res) => {
+        // req.data.password = "$2b$12$MHbP0b075uWiH20gQOkMRe4bz4h46Rp0X7D/zXA.6qB4fzRSiLlIi"
         console.log(res, "the social res");
         loginProcess(res);
       })
@@ -42,6 +42,7 @@ function Social() {
     windowsProp.current.document.URL.split("api")[1] &&
     windowsProp.current.document.URL.split("api")[1] === "/protected"
   ) {
+    // console.log(windowsProp.current.document.URL.split("api"))
     profileNavigtr();
   }
   return (

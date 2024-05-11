@@ -31,6 +31,18 @@ body {
   /* font-weight: 800 !important; */
 }
 
+.gb{
+  font-family: Gilroy-Bold;
+}
+
+.blw{
+  font-family: Balham;
+}
+
+.gsb{
+  font-family: Gilroy-SemiBold;
+}
+
 .cp {
   cursor: pointer !important;
 }
@@ -493,8 +505,9 @@ ul{
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
+  object-position: center; 
   /* margin-bottom: 10rem; */
-  /* border-radius: 15px 15px 0 0; */
+  border-radius: 15px 15px 0 0;
 }
 
 
@@ -1181,7 +1194,7 @@ li {
   overflow-y: scroll;
   height: 66vw;
   overflow-x: hidden;
-  width: 62vw !important;
+  width: 48vw !important;
 }
 
 
@@ -1231,10 +1244,13 @@ li {
 
 .friClColumn{
   width: 22% !important;
+  margin-left: 6vw;
+  margin-right: 2vw;
 }
 
 .scrollyHeighty{
-  height: 49vw;
+  height: 41vw;
+  width: 46vw !important;
 }
 
 .heightExtender{
@@ -1289,7 +1305,8 @@ li {
 
 .hostDetailTextPar{
   font-size: 1.5vw;
-  color: #858585;
+  color:  #606060;
+  ;
 }
 
 .likeCommText{
@@ -1367,6 +1384,7 @@ background-color: #000000;
   border-radius: 50%;
   height: 5vw;
   margin-left: 1vw;
+  object-fit: cover;
 }
 
 .cDiv{
@@ -1574,4 +1592,96 @@ background-color: #000000;
   border: 1px solid black;
   border-radius: 1vw;
   overflow: hidden;
+}
+
+.reqquirey{
+  margin-top: 8vw !important;
+  margin-left: 2vw;
+}
+
+.clssss{
+  margin-top: 5vw;
+  margin-left: 2vw !important;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.llas{
+  animation: scroll 10s linear infinite; 
+}
+
+.h123{
+  height: 38vw;
+}
+
+.h134{
+  height: max-content;
+}
+
+.seemorebutton{
+  border: #0000008a solid 1px;
+  width: 15vw !important;
+  text-align: center;
+  border-radius: 2vw;
+  height: 3vw;
+  padding-top: 0.3vw;
+  font-size: 1.5vw;
+  color: #0000007a;
+  cursor: pointer;
+}
+
+.alllll{
+  position: absolute;
+  left: 0vw;
+  top: 10vw;
+  background-color: rgba(0, 0, 0, 0.541);
+  color: white;
+  height: 1vw;
+  width: 1vw;
+  border-radius: 50%;
+  padding: 1vw;
+  cursor: pointer;
+}
+
+.arrrr{
+  position: absolute;
+  right: 10.8vw;
+  top: 10vw;
+  background-color: rgba(0, 0, 0, 0.541);
+  color: white;
+  height: 1vw;
+  width: 1vw;
+  border-radius: 50%;
+  padding: 1vw;
+  cursor: pointer;
+}
+.sadjoasasjd{
+  background-color: rgba(0, 0, 0, 0.384);
+}
+
+.elipiseee{
+  border-radius: 1vw 1vw 0 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
+}
+
+.eliHead{
+  font-size: 2vw;
+  font-weight: 700;
+  text-align: center;
+}
+
+.eliDesc {
+  word-wrap: break-word;
+  font-size: 1.5vw;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Limit to 3 lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
 }

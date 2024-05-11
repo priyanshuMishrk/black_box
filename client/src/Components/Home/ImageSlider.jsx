@@ -24,8 +24,8 @@ const ImageSlider = () => {
             }}
           />
           <Carousel.Caption className="c2">
-            <h5>BRINGING YOU</h5>
-            <h5>THE BEST TEACHERS</h5>
+            <h5>LEARN FROM</h5>
+            <h5>THE BEST</h5>
             <b>
               <h6>Dance, Yoga, Music, Fitness , Illustration and more.</h6>
             </b>

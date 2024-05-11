@@ -596,7 +596,7 @@ const Profile = () => {
                           ) {
                             return (
                               <div
-                                className="mb-4 bggrey rounded-5  ms-1 me-2 pt-2 w-100 scrollyHeighty"
+                                className="mb-4 bggrey rounded-5  ms-1 me-2 pt-2  scrollyHeighty"
                                 style={{
                                   // width: "90vh",
                                   // height: "90vh"
@@ -604,9 +604,16 @@ const Profile = () => {
 
                                 key={index}
                               >
-                                <Row className="w-100 p-0 checker3">
+                                <Row className=" p-0 checker3" style={{
+                                  height:"4.77vw"
+                                }}>
                                   <Col md={8} className="w-100 d-flex alignt-items-center">
-                                    <div className="d-flex w-100">
+                                    <div className="d-flex w-100" style={{
+                                      height : "4.77vw",
+                                      paddingTop : "0.5vwvw",
+                                      marginBottom : "1vw",
+
+                                    }}>
                                       {/* <img
                                     src={
                                       host
@@ -618,18 +625,24 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   /> */}
-                                      <div className="d-flex justify-content-between w-100 align-items-center ">
+                                      <div className="d-flex justify-content-between w-100 align-items-center " style={{
+                                        height : "3.77vw"
+                                      }}>
                                         <h5 className="ps-3 pt-2 hostDetailTextPar gl">{course.title}</h5>
                                         <Link to={`/trainer/${course.host_details.id}`} className="d-flex align-items-center">
-                                        <div className="me-4 black mb-1 hostDetailText gx"> 
+                                        <div className="me-4 black hostDetailText gx"> 
                                           {course.host_details.first_name} {course.host_details.last_name}
                                         </div>
-                                        <p><img 
+                                        <p className="mb-0"><img 
                                           src={course.host_details.img_thumbnail}  
-                                          width={50}
-                                          height={50}
+                                          
                                           style={{
+
+                                            width : "3.715vw",
+                                            height: "3.715vw",
                                             borderRadius: "50%",
+                                            objectFit : "cover",
+                                            marginRight : "1vw"
                                           }} 
                                         alt="Profile Pic" />
                                         </p>
@@ -638,7 +651,7 @@ const Profile = () => {
                                     </div>
                                   </Col>
                                 </Row>
-                                <Link to={`/classes/join/${course.id}`} className=" heightExtender w-100">
+                                <Link to={`/classes/join/${course.id}`} className="  w-100">
                                   <div className="d-flex w-100 bggrey m-0 p-0 ">
                                     <img
                                       src={a[0]}
@@ -646,7 +659,7 @@ const Profile = () => {
                                       className=""
                                       style={{
                                         width: "100%",
-                                        height:"36.984vw" ,
+                                        height:"30.683vw" ,
                                         "object-fit": "cover",
                                       }}
                                     />
@@ -676,6 +689,10 @@ const Profile = () => {
                                   <Col
                                     md={12}
                                     className="d-flex justify-content-between ps-4"
+                                    style={{
+                                      marginTop : "1vw",
+                                      marginBottom : "1vw"
+                                    }}
                                   >
                                     {/* <div >
                                   {reaction.length > 0 &&

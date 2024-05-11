@@ -37,6 +37,24 @@ code {
     url("./Fonts/Gilroy/gilroy-extrabold.otf") format("truetype");
 }
 
+@font-face {
+  font-family: "Balham";
+  src: local("Balham"), local("Balham"),
+    url("./Fonts/Gilroy/Balham.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: local("Gilroy Bold"), local("Gilroy-Bold"),
+    url("./Fonts/Gilroy/Gotham-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy-SemiBold";
+  src: local("Gilroy Semi Bold"), local("Gilroy-SemiBold"),
+    url("./Fonts/Gilroy/Radomir\ Tinkov\ -\ Gilroy-SemiBold.otf") format("truetype");
+}
+
 .skeleton {
   animation: skeleton-loader 1s linear infinite alternate;
 }

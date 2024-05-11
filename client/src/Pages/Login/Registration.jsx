@@ -5,6 +5,7 @@ import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Default from "../../Images/defualtProPic.jpg";
+import {  useNavigate } from "react-router-dom";
 // import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
@@ -45,6 +46,7 @@ let schema = yup.object().shape({
 });
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
@@ -64,6 +66,19 @@ const Registration = () => {
     clsroom,
     setClsroom,
   } = useContext(AuthContext);
+
+  const facebook = () => {
+    navigate("/social/facebook");
+  };
+
+  const google = () => {
+    // window.open(
+    //   BaseUrl + "/signup/google",
+    //   "_blank",
+    //   "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400",
+    // );
+    navigate("/social/google");
+  };
 
   useEffect(() => {
     if (clsroom) {
@@ -390,10 +405,10 @@ const Registration = () => {
           </Container>
           <hr className="my-3" />
           <div className="d-flex justify-content-between w-100">
-            <GoogleLoginButton>
+            <GoogleLoginButton onClick={google}>
               <span>Signup with Google</span>
             </GoogleLoginButton>
-            <FacebookLoginButton>
+            <FacebookLoginButton onClick={facebook}>
               <span>Signup with Facebook</span>
             </FacebookLoginButton>
           </div>

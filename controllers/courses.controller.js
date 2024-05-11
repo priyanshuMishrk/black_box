@@ -190,7 +190,7 @@ class Course_inf {
   getCourseById = async (req, res) => {
     try {
       const result = await Courses.courseById(Number(req.params.id));
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       return err.message;
     }

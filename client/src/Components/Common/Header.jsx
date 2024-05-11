@@ -33,8 +33,8 @@ const Header = () => {
   const { setToChoose, value, setValue, seenavs } = useContext(AuthContext);
 
   return (
-    <>
-      <nav className={navb ? "active w-100" : "w-100"}>
+    < >
+      <nav className={navb ? "active w-100 gsb" : "w-100 gsb"} >
         <Container
           fluid       
           className="d-flex justify-content-between w-100 p-3 navbar"

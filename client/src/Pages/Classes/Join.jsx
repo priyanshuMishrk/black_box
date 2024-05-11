@@ -85,12 +85,12 @@ const Join = () => {
   useEffect(() => {
     setLoading(false);
     const fetchData = async () => {
+      let data;
       await axios
         .get(BaseUrl + "/courses/" + id)
         .then((res) => {
           amPartcpnt(res.data.Participants);
-          const data = res.data;
-          // console.log(data, "the data");
+          data = res.data;
           // console.log(user, "the user data");
           if (data.host_details.img_thumbnail.includes("{")) {
             data.host_details.img_thumbnail =
@@ -101,12 +101,15 @@ const Join = () => {
             data.host_details.img_thumbnail =
               data.host_details.img_thumbnail.secure_url;
           }
-
-          setCourse(data);
         })
         .catch((err) => {
           console.log(err.message);
         });
+        
+        await axios.get(BaseUrl + "/host/profile/" + data.host_details.id).then((res) => {
+          data.host_details.img_thumbnail = res.data.img_thumbnail
+          setCourse(data);
+      })
     };
     fetchData();
     // eslint-disable-next-line
@@ -250,19 +253,14 @@ const Join = () => {
 
               <Link to={`/trainer/${course.host_details.id}`}>
                 <div className="d-flex justify-content-end w-100 ">
+                  {/*  */}
                   <img
                     src={
                       // course.host_details.img_thumbnail
                       //   ? course.host_details.img_thumbnail.secure_url
                       //   : DefaultPic
-                      course.host_details.img_thumbnail
-                        ? typeof course.host_details.img_thumbnail ===
-                            "string" &&
-                          course.host_details.img_thumbnail.includes("{")
-                          ? JSON.parse(course.host_details.img_thumbnail)
-                              .secure_url
-                          : course.host_details.img_thumbnail.secure_url
-                        : DefaultPic
+                      
+                      course.host_details.img_thumbnail || DefaultPic
                     }
                     alt="class1"
                     className="img-fluid iconpic icon2 "
@@ -664,6 +662,7 @@ const Join = () => {
                             setLoading(true);
                           } else {
                             setToChoose(course.id);
+                            // console.log(data, "the data");
                             navigate("/login");
                           }
                         }}
@@ -697,7 +696,7 @@ const Join = () => {
                       </Button>
                     </div>}
                     {(user &&
-                    user.id == course.host &&
+                    user.id === course.host &&
                     !course.completion &&
                     !false) && <div>
                       <Button className="bgdark text-light rounded-3 border border-1 mt-3 llii"

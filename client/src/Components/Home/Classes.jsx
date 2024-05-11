@@ -1,7 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
+import  ReactCardFlip  from 'react-card-flip';
+import Card from "./Card";
 // import ReadMoreReact from "read-more-react";
 // import $ from "jquery";
 
@@ -18,6 +20,36 @@ import AuthContext from "../../Context/AuthContext";
 const Classes = () => {
   const { getCoursesList, courseList, value } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [small , setSmall] = useState(true)
+  const [currentInd , setCurrentInd] = useState()
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+
+  function handleMouseEnter(ind) {
+    console.log(currentInd)
+    clearTimeout(hoverTimeout); // Clear any existing timeout
+  const timeout = setTimeout(() => setCurrentInd(ind), 0); 
+  setHoverTimeout(timeout);
+    console.log(currentInd)
+  }
+
+
+  function handleMouseLeave() {
+    console.log(currentInd)
+    clearTimeout(hoverTimeout); // Clear the timeout if mouse leaves
+    setHoverTimeout(null);
+    setCurrentInd(null)
+    console.log(currentInd)
+  }
+
+  function setH(){
+    setSmall(false)
+  }
+
+  function setS(){
+    setSmall(true)
+  }
+  
   useEffect(() => {
     getCoursesList();
     // eslint-disable-next-line
@@ -183,16 +215,22 @@ const Classes = () => {
           </Row> */}
           <Row className="pb-4 ">
             <div
-              className="d-flex w-100 abc"
+              className={`d-flex w-100 abc ${small ? "h123":"h134"}`}
+
               style={{
-                overflowX: "scroll",
+                overflowX : "clip",
                 overflowY: "hidden",
+                flexWrap: "wrap",  
+                alignItems : "center",
+                justifyContent : "flex-start",
+                marginLeft : '6vw',
+                marginRight : "3vw"
               }}
             >
               {courseList &&
                 courseList.length > 0 &&
                 // eslint-disable-next-line
-                courseList.map((course) => {
+                courseList.map((course, index) => {
                   const a = JSON.parse(course.images)[0];
                   //check if the course name or course description is in the search bar
                   if (
@@ -200,93 +238,125 @@ const Classes = () => {
                     course.description
                       .toLowerCase()
                       .includes(value.toLowerCase()) ||
-                    value === ""
+                    value === "" 
                   ) {
-                    return (
-                      <div
-                        className="my-4 mt-1 me-4 class "
-                        onClick={() => navigate("/classes/join/" + course.id)}
-                        key={course.id}
-                      >
+                      return (
                         <div
-                          className="boxshadow  mb-2 mb-5 cp my-4 zoom"
-                          style={{
-                            width: "190px",
-                          }}
+                          className="mt-1 me-4 class "
+                          onClick={() => navigate("/classes/join/" + course.id)}
+                          key={course.id}
                         >
-                          <div className="profileclassesimg22">
-                            <img
-                              src={a}
-                              className="classesimg22"
-                              alt="classImg"
-                            />
-                          </div>
-                          <Row className="profilest bw m-0 ">
-                            <div
-                              className="d-flex"
-                              style={{
-                                overflowX: "hidden",
-                              }}
+                          <div
+                            className=" mb-2 mb-4 cp"
+                            style={{
+                              width: "20vw",
+                            }}
+                          >
+                            <div onMouseOver={()=>handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}>
+                            <ReactCardFlip key={index}
+                            flipDirection='vertical'
+                            isFlipped={ index === currentInd
+                            }
+                            flipSpeedBackToFront ={2}
+                                // index={index}
+                                // flipped={isFlipped}
+                                // handleClick={handleClick}
+                                >
+                              <div className="profileclassesimg22">
+                              <img
+                                src={a}
+                                className="classesimg22"
+                                alt="classImg"
+                                
+                              />
+
+                              </div>
+                            <div style={
+                              {
+                                width:"19.98vw",
+                                height:"30vw",
+                                color : "black",
+                                backgroundColor:"#ffcc00",
+                                overflow : "clip"
+                              }
+                            }
+                            className="elipiseee"
                             >
-                              <div className=" w-100 pe-1 ms-1 pt-1 pb-1">
-                                <b>
-                                  <h5
-                                    className="gx py-1 text-dark"
+                              <span className="eliHead gb">
+                                Description
+                              </span>
+                              <span className="eliDesc gsb">
+                              {course.description}
+
+                              </span>
+                            </div>
+                            </ReactCardFlip>
+                              </div>
+                              {/* <Card jolo={a} /> */}
+                            <Row className="profilest bw m-0 ">
+                              <div
+                                className="d-flex"
+                                style={{
+                                  overflowX: "hidden",
+                                }}
+                              >  
+                                <div>
+                                  <img src={course.host_details.img_thumbnail} alt="host"
+                                  style={{
+                                    width : "4vw",
+                                    height : "4vw",
+                                    objectFit : "cover",
+                                    objectPosition : "center",
+                                    borderRadius : "50%",
+                                    marginTop : "1vw"
+  
+                                  }}
+                                  />
+                                </div>
+                                <div className=" w-100 pe-1  pt-1 pb-1" style={{
+                                  marginTop : "1vw", 
+                                  marginLeft : "1vw"
+                                }}>
+                                  <b>
+                                    <h5
+                                      className="gx py-1 text-dark"
+                                      style={{
+                                        margin: "auto",
+                                        fontSize: "16px",
+                                        fontWeight: "400",
+                                      }}
+                                    >
+                                      {course.title && course.title.length > 30
+                                        ? course.title
+                                            .substring(0, 35)
+                                            .split(" ")
+                                            .slice(0, -1)
+                                            .join(" ") + "..."
+                                        : course.title}
+                                    </h5>
+                                  </b>
+                                  <p
                                     style={{
-                                      margin: "auto",
-                                      fontSize: "16px",
-                                      fontWeight: "400",
+                                      fontSize: "13px",
+                                      lineHeight: "1.2",
                                     }}
                                   >
-                                    {course.title && course.title.length > 30
-                                      ? course.title
-                                          .substring(0, 35)
-                                          .split(" ")
-                                          .slice(0, -1)
-                                          .join(" ") + "..."
-                                      : course.title}
-                                  </h5>
-                                </b>
-                                <p
-                                  style={{
-                                    fontSize: "13px",
-                                    lineHeight: "1.2",
-                                  }}
-                                >
-                                  {course.description &&
-                                  course.description.length > 45
-                                    ? course.description
-                                        .substring(0, 45)
-                                        .split(" ")
-                                        .slice(0, -1)
-                                        .join(" ") + "..."
-                                    : course.description}
-                                </p>
-
-                                <div className="  clsfee ">
-                                  <div className="d-flex">
-                                    <h6 className="gx">
-                                      <span className="textgrey">FEE:</span> ₹
-                                      {course.price}
-                                      <span className="gl">/ person</span>
-                                    </h6>
-                                  </div>
-                                  <div className="d-flex">
-                                    <h6 className="gx">
-                                      <span className="textgrey"> Type:</span>
-                                      {course.duration_type}
-                                    </h6>
-                                  </div>
+                                    {course.host_details.first_name + " " +
+                                    course.host_details.last_name}
+                                  </p>
                                 </div>
                               </div>
-                            </div>
-                          </Row>
+                            </Row>
+                          </div>
                         </div>
-                      </div>
-                    );
+                      );
+                    
                   }
                 })}
             </div>
+            {small && <div onClick={setH} className="seemorebutton gx">SEE MORE</div>}
+            
           </Row>
         </div>
       </Container>

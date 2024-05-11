@@ -38,6 +38,25 @@ const ClassroomJoinForm = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [clData, setClassroom] = useState();
+    function addTime(timeString, minutesToAdd) {
+        // 1. Split the time string into hours and minutes
+        const [hours, minutes] = timeString.split(':').map(Number);
+      
+        // 2. Create a Date object 
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+      
+        // 3. Add minutes
+        date.setMinutes(date.getMinutes() + parseInt(minutesToAdd));
+        console.log(date)
+      
+        // 4. Format as a time string
+        const newHours = date.getHours().toString().padStart(2, '0');
+        const newMinutes = date.getMinutes().toString().padStart(2, '0');
+      
+        return `${newHours}:${newMinutes}`;
+      }
 
     const {
         getClassroomById,
@@ -47,7 +66,7 @@ const ClassroomJoinForm = () => {
 
 
     useEffect(() => {
-        const fetchData = async (id) => {
+        const fetchData = async (secure_urlid) => {
             const data = await getClassroomById(id)
             setClassroom(data)
         }
@@ -179,21 +198,22 @@ const ClassroomJoinForm = () => {
                         <Row className="w-100">
                             <Col md={6} sm={12}>
                                 <div className="m-0 p-0 ps-1">
-                                    <div className="w-100 mb-2 icon1">
-                                        <div className="w-100 mt-2 ">
-                                            {clData.requirements && clData.requirements.length > 1 ? (
-                                                <h5>REQUIREMENTS</h5>
+                                    <div className="w-100 mb-2 ">
+                                        <div className="w-100  reqquirey">
+                                            {clData.requirements && clData.requirements.length >= 1 ? (
+                                                <h5 className="gx">REQUIREMENTS</h5>
                                             ) : (
                                                 ""
                                             )}
                                             <ul>
-                                                {clData.requirements && clData.requirements.length > 1
+                                                {clData.requirements && clData.requirements.length >= 1
                                                     ? // eslint-disable-next-line
                                                     clData.requirements.map((item, index) => {
-                                                        if (item.requirements) {
+                                                        if (item) {
+                                                            console.log(true)
                                                             return (
                                                                 <li key={index} className="gl fn">
-                                                                    {item.requirements}
+                                                                    {item}
                                                                 </li>
                                                             );
                                                         }
@@ -201,7 +221,7 @@ const ClassroomJoinForm = () => {
                                                     : ""}
                                             </ul>
                                         </div>
-                                        <div className="w-100 mt-2 ">
+                                        <div className="w-100  ">
                                             {clData.classes ? <h5>CLASSES</h5> : ""}
                                             {clData.classes ? (
                                                 <p className="fn">{clData.classes}</p>
@@ -210,12 +230,12 @@ const ClassroomJoinForm = () => {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="icon2">
+                                    <div className="icon2 clssss">
                                         <div>
                                             {clData ? (
                                                 clData.Classes ? (
                                                     clData.Classes.length > 0 ? (
-                                                        <h5>Classes</h5>
+                                                        <h5 className="gx">Classes</h5>
                                                     ) : (
                                                         ""
                                                     )
@@ -229,16 +249,16 @@ const ClassroomJoinForm = () => {
                                         {clData.Classes
                                             ? // eslint-disable-next-line
                                             clData.Classes.map((item, index) => {
-                                                if (item.title) {
+                                                if (item) {
                                                     return (
                                                         <div key={index}>
                                                             <h6 className="gl">
                                                                 <span className="textgrey ">
                                                                     Day {index + 1}
                                                                 </span>{" "}
-                                                                :<b> {item.title}</b>
+                                                                :<b> {item.duration} mins</b>   
                                                             </h6>
-                                                            <p className="fn gl">{item.description}</p>
+                                                            <p className="fn gl">{item.time} - {addTime(item.time)}</p>
                                                         </div>
                                                     );
                                                 }

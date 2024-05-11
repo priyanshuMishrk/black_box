@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const Users = new (require("../services/users.service"))();
 const fs = require("fs");
 const { token } = require("morgan");
+const imagePath = '../images/blackbox-logo-01.png'
 let userData;
 
 class User_Ctrl {
@@ -11,7 +12,6 @@ class User_Ctrl {
       userData = null;
     }, 10000);
     try {
-      console.log(userData);
       if (userData) {
         res.status(200).json(userData);
         userData = null;
@@ -158,10 +158,11 @@ class User_Ctrl {
   };
   signup = async (req, res) => {
     try {
-      let data = req.body;
+      let data = req.user;
       if (data.hasOwnProperty("provider")) {
         delete data.provider;
       }
+      // console.log(json.parse(data) , "kkkkkkkkkkkkkokkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
       if (req.hasOwnProperty("user")) {
         // console.log(req.user, "facebook/google");
         data = {
@@ -170,6 +171,18 @@ class User_Ctrl {
           first_name: req.user.name.givenName,
           last_name: req.user.name.familyName,
           email: req.user.emails[0].value,
+          // email : "priyanshumishra@gmail.com",
+          password: req.user.id,
+        };
+      }
+      else if (req.hasOwnProperty("_json") && req.user.provider == "facebook"){
+        data = {
+          provider: req.user.provider,
+          img_thumbnail: req.user.photos[0].value,
+          first_name: req.user.name.givenName,
+          last_name: req.user.name.familyName,
+          email: req.user.emails[0].value,
+          // email : "priyanshumishra@gmail.com",
           password: req.user.id,
         };
       }
@@ -178,11 +191,44 @@ class User_Ctrl {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
           userData = result;
-          return res
-            .status(400)
-            .send(
-              `Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
-            );
+          res.setHeader('Content-Type', 'text/html');
+
+  // Send HTML content as the response
+        return res.send(`<html>
+        <head>
+        <title>HTML Response</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            padding: 1vw;
+          }
+          h1 {
+            color: #ffcc00;
+            font-size: 1.5vw !important;
+          }
+          button {
+            padding: 1vw 1.2vw;
+            background-color: #ffcc00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1vw !important;
+            border-radius: 0.5vw;
+          }
+        </style>
+        </head>
+        <body>
+        <img src=${imagePath} class="jj" alt="Sample Image" />
+        <h1 class="ll">Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully.Please click on the Profile button (right hand side) to visit your page.</h1>
+        <button onclick="window.close()">Close Page</button>
+        </body>
+        </html>`);
+          // return res
+          //   .status(400)
+          //   .send(
+          //     `Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
+          //   );
         } else {
           return res.status(201).json(result);
         }
