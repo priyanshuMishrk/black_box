@@ -3,7 +3,15 @@ import Footer from "../../Components/Common/Footer";
 import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import Logo from "../../blackbox-logo-01.png";
+import PH from "../../Images/PHF.png"
 const StartClass = () => {
+  const [opc, setOpc] = useState(true)
+  function troll() {
+    setOpc(false)
+  }
+
+
+
   const baseURL = window.location.origin; 
     function randomID(len) {
         let result = '';
@@ -60,14 +68,15 @@ const StartClass = () => {
             },
           ],
           showLeavingView : false,
-          onLeaveRoom: () => {
-            window.location.href = `${baseURL}/profile`;  // Replace with your target URL 
-          }
+          onJoinRoom : troll
       });
 
     }
 
     return (<>
+    <div className={opc ? "opc0":""}>
+      <img src={PH} className="classMeet"/>
+    </div>
     <div className="myCallContainer gl"
       ref={myMeeting}
       style={{ width: '100vw', height: '100vh' }}></div>

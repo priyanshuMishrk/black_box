@@ -4,8 +4,16 @@ import Header from "../../Components/Common/Header";
 import Logo from "../../blackbox-logo-01.png";
 import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import PH from "../../Images/PHF.png"
 
 const JoinClass = () => {
+  const [opc, setOpc] = useState(true)
+  function troll() {
+    setOpc(false)
+  }
+
+
+
   function randomID(len) {
     let result = '';
     if (result) return result;
@@ -41,7 +49,7 @@ const JoinClass = () => {
           },
         },
         branding : {
-          logoURL: Logo
+          logoURL: Logo,
         },
         showUserList: true,
         sharedLinks: [
@@ -53,7 +61,8 @@ const JoinClass = () => {
                 '?roomID=' +
                 roomid,
             },
-          ]
+          ],
+          onJoinRoom : troll
       });
       
     }
@@ -68,6 +77,9 @@ const JoinClass = () => {
           }
     }, []);
     return (<>
+    <div className={opc ? "opc0":""}>
+      <img src={PH} className="classMeet"/>
+    </div>
     <div className="myCallContainer gl"
       ref={myMeeting}
       style={{ width: '100vw', height: '100vh' }}>
