@@ -8,10 +8,9 @@ const Streaming = () => {
     const [roomId , setRoomID] = useState()
     const Navigate = useNavigate()
     const handleJoin = () => {
-        Navigate(`/room/${roomId}`)
+        Navigate(`/room/${roomId}`) 
     }
     return (<>
-    {/* <Header/> */}
         <div>
             <input type="text" placeholder="enter room id"  value={roomId} onChange={ e => setRoomID(e.target.value)} />
             <button onClick={handleJoin}> Join </button>

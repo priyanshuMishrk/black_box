@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext, { BaseUrl } from "../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 function Social() {
   let url = "/signup/";
@@ -25,6 +26,7 @@ function Social() {
       .catch((err) => {
         console.log(err, "the error of social msg");
       });
+      
   };
 
   useEffect(() => {

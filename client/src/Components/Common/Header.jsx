@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../blackbox-logo-01.png";
@@ -20,6 +20,7 @@ const Header = () => {
 
   const [isInputVisible, setIsInputVisible] = useState(false);
   // const [value, setValue] = useState("");
+  const [adminAllow, setAdminAllow] = useState()
 
   const handleSearchIconClick = () => {
     setIsInputVisible(true);
@@ -29,8 +30,23 @@ const Header = () => {
     setValue(e.target.value);
   };
 
+
   window.addEventListener("scroll", handleNavbar);
-  const { setToChoose, value, setValue, seenavs } = useContext(AuthContext);
+  const { setToChoose, value, setValue, seenavs, user } = useContext(AuthContext);
+  
+
+  useEffect(()=>{
+    if (user && adminAllow != "initial"){
+      const brokenMail = user.email.split('@')
+      console.log(brokenMail)
+      if (brokenMail[1] === 'blackis.in'){
+        setAdminAllow(true)
+      }else {
+        setAdminAllow("initial")
+      }
+      console.log(adminAllow)
+    }
+  },[])
 
   return (
     < >
@@ -78,6 +94,14 @@ const Header = () => {
                         !isInputVisible &&
                         <Link to="/classes" className={navb?"link px-5":"link2 px-5"}>
                           JOIN A CLASS
+                        </Link>
+                        }
+                      </li>
+
+                      <li>{
+                        !isInputVisible && adminAllow===true &&
+                        <Link to="/admin" className={navb?"link adminlink ":"link2 adminlink "}>
+                          ADMIN
                         </Link>
                         }
                       </li>

@@ -200,11 +200,11 @@ const Registration = () => {
                       <label htmlFor="upload_image">
                         <span className="profilepic__icon">
                           {!image ? (
-                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp blw">
                               Upload Logo
                             </p>
                           ) : (
-                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4 blw ">
                               Change photo
                             </p>
                           )}
@@ -341,7 +341,7 @@ const Registration = () => {
                 </Row>
 
                 <div className="mt-3 d-flex flex-column t-3">
-                  <p className="moto opacity-75">
+                  <p className="moto opacity-75 gsb">
                     Want subscription for classroom?
                     <Button
                       onClick={() => {
@@ -373,12 +373,12 @@ const Registration = () => {
                     <Button
                       variant="contained"
                       type="submit"
-                      className="bgdark w-100"
+                      className="bgdark w-100 gsb mb-4"
                     >
                       {loading ? (
                         <>
                           <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                            <div className="ldio-cqj9sf9mcdj">
+                            <div className="ldio-cqj9sf9mcdj ">
                               <div></div>
                             </div>
                           </div>

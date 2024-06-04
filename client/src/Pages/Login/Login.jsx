@@ -4,7 +4,7 @@ import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Footer from "../../Components/Common/Footer";
-import AuthContext from "../../Context/AuthContext";
+import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
@@ -30,11 +30,11 @@ const Login = () => {
     //   "_blank",
     //   "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400",
     // );
-    navigate("/social/google");
+    window.location.href =  `${BaseUrl}/signup/google`
   };
 
   const facebook = () => {
-    navigate("/social/facebook");
+    window.location.href =  `${BaseUrl}/signup/facebook`
   };
 
   useEffect(() => {

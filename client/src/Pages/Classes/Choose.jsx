@@ -50,7 +50,7 @@ const Choose = () => {
       >
         <Row className="d-flex justify-content-center text-center">
           <Col md={8}>
-            <p className="description">
+            <p className="description blw ">
               There are two formats in which classes are conducted on Black Box.
               One as a single class. And the other as a course conducted as a
               series of classes over time. You can choose the format you want to

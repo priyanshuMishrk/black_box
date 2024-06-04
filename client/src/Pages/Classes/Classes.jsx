@@ -62,8 +62,8 @@ const Classes = () => {
         <div className="d-flex" style={{ overflowX: "hidden", paddingTop : "1vw" }}>
           <img src={course.host_details.img_thumbnail} alt="nothingcool" className="dfimg" />
           <div className="cDiv">
-            <span className="ctitle">{course.title}</span>
-            <span className="cName">
+            <span className="ctitle gb">{course.title}</span>
+            <span className="cName gsb">
             {`${course.host_details.first_name} ${course.host_details.last_name}`}
             </span>
           </div>

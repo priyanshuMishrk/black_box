@@ -158,13 +158,15 @@ class User_Ctrl {
   };
   signup = async (req, res) => {
     try {
+      console.log(":::::::161", req)
       let data = req.user;
-      if (data.hasOwnProperty("provider")) {
-        delete data.provider;
-      }
+      // if (data.hasOwnProperty("provider")) {
+      //   delete data.provider;
+      // }
       // console.log(json.parse(data) , "kkkkkkkkkkkkkokkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
       if (req.hasOwnProperty("user")) {
         // console.log(req.user, "facebook/google");
+        console.log("\n:168\n" , req)
         data = {
           provider: req.user.provider,
           img_thumbnail: req.user.photos[0].value,
@@ -176,6 +178,7 @@ class User_Ctrl {
         };
       }
       else if (req.hasOwnProperty("_json") && req.user.provider == "facebook"){
+        console.log(":180")
         data = {
           provider: req.user.provider,
           img_thumbnail: req.user.photos[0].value,
@@ -187,43 +190,15 @@ class User_Ctrl {
         };
       }
       const result = await Users.signup(data);
+      console.log("dataa :::", data)
+      console.log(result, ".....................jk................")
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
-          console.log(result, "vikash");
+          console.log(":pp")
+          // console.log(result, "vikash");
           userData = result;
-          res.setHeader('Content-Type', 'text/html');
-
-  // Send HTML content as the response
-        return res.send(`<html>
-        <head>
-        <title>HTML Response</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            padding: 1vw;
-          }
-          h1 {
-            color: #ffcc00;
-            font-size: 1.5vw !important;
-          }
-          button {
-            padding: 1vw 1.2vw;
-            background-color: #ffcc00;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1vw !important;
-            border-radius: 0.5vw;
-          }
-        </style>
-        </head>
-        <body>
-        <img src=${imagePath} class="jj" alt="Sample Image" />
-        <h1 class="ll">Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully.Please click on the Profile button (right hand side) to visit your page.</h1>
-        <button onclick="window.close()">Close Page</button>
-        </body>
-        </html>`);
+          req.session.userData = userData;
+          return res.redirect('http://localhost:3000/loadingProfile'); 
           // return res
           //   .status(400)
           //   .send(
@@ -233,8 +208,10 @@ class User_Ctrl {
           return res.status(201).json(result);
         }
       }
+      console.log("not in the error")
       res.status(400).json(result);
-    } catch (err) {
+    } catch (err) { 
+      console.log("in the  error")
       res.status(400).json(err.message);
     }
   };

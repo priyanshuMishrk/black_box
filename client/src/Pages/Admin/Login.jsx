@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
@@ -12,14 +12,15 @@ import { useEffect } from "react";
 
 const AdminLogin = () => {
   const {
-    // loginUser,
+    // loginUser, 
     // setValues,
-    // values,
+    // values, sampath@blackis.in , priyanshu@blackis.in
     loading,
     setLoading,
     // clsroom,
     // setClsroom,
   } = useContext(AuthContext);
+  const [inputValue, setInputValue] = useState('');
   //   const [clssroom, setClssroom] = useState(false);
 
   //   const navigate = useNavigate();
@@ -51,8 +52,13 @@ const AdminLogin = () => {
     // eslint-disable-next-line
   }, []);
 
+  const [showPass , SetShowPass] = useState(false)
+
   const changeHandler = (e) => {
-    // setValues({ ...values, [e.target.name]: e.target.value });
+    setInputValue('')
+    e.preventDefault()
+    SetShowPass(true)
+    console.log(showPass)
   };
 
   const loginBtnj = async (e) => {
@@ -71,14 +77,48 @@ const AdminLogin = () => {
 
       <Container fluid className="d-flex justify-content-center  page p-0 m-0">
         <div className=" logindiv ">
-          <h1 className=" gl title">Admin Sign In </h1>
-          {/* <p className="desc">
-            Not yet joined?
-            <Link to="/signup">
-              <span className="underline cp"> Register</span>
-            </Link>
-          </p> */}
+          <h1 className=" gl title">ADMIN </h1>
+          {showPass ? 
           <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginBtnj}>
+          <TextField
+            type="password"
+            label="Password"
+            variant="outlined"
+            className=" mb-3"
+            name="Password"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
+          />
+          
+          <div className="mt-3 d-flex flex-column">
+            <div className="mt-4 pt-2 w-100">
+              <Button
+                variant="contained"
+                type="submit"
+                className="bgdark w-100 "
+              >
+                {loading ? (
+                  <>
+                    <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                      <div className="ldio-cqj9sf9mcdj">
+                        <div> </div>
+                      </div>
+                    </div>
+                    Logging in
+                  </>
+                ) : (
+                  " Enter "
+                )}
+              </Button>
+            </div>
+          </div>
+        </form>
+          : <form className="d-flex flex-column m-2 mt-5  " onSubmit={changeHandler}>
             <TextField
               label="Email"
               variant="outlined"
@@ -87,41 +127,12 @@ const AdminLogin = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  // loginUser();
                 }
               }}
-              onChange={changeHandler}
+              onChange={(e) => setInputValue(e.target.value)}              
             />
-            <TextField
-              type="password"
-              label="Password"
-              variant="outlined"
-              name="password"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  // loginUser();
-                }
-              }}
-              onChange={changeHandler}
-            />
+            
             <div className="mt-3 d-flex flex-column">
-              {/* <p className="moto opacity-75">
-                Use your email or mobile to signin
-              </p> */}
-              {/* <center>
-                <Link
-                  to="/otplogin"
-                  className="underline"
-                  style={{
-                    width: "fit-content",
-                    color: "black",
-                    cursor: "pointer",
-                  }}
-                >
-                  Forgot your password
-                </Link>
-              </center> */}
               <div className="mt-4 pt-2 w-100">
                 <Button
                   variant="contained"
@@ -138,37 +149,15 @@ const AdminLogin = () => {
                       Logging in
                     </>
                   ) : (
-                    "  Join here"
+                    " Enter "
                   )}
                 </Button>
               </div>
             </div>
-          </form>
+          </form>}
           <div className="my-4">
             <hr />
           </div>
-
-          {/* <a className="hollow button primary w-100" href="#"
-          >
-            <img
-              width={15}
-              style={{ marginBottom: "3px", marginRight: "5px" }}
-              alt="Google login"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-            />
-            Sign in with Google
-          </a> */}
-          {/* <GoogleLoginButton onClick={google} /> */}
-
-          {/* <a className="hollow button primary w-100" href="#"
-          >
-            <img
-              width={15}
-              style={{ marginBottom: "3px", marginRight: "5px" }}
-            />
-            Sign in with Facebook
-          </a> */}
-          {/* <FacebookLoginButton onClick={facebook} /> */}
         </div>
       </Container>
 

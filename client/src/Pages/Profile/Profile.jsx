@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
+import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Whatsnew from "../../Components/Feeds/Whatsnew";
 import Classes from "../../Images/Classes/classes.jpg";
 // import Class2 from "../../Images/Classes/class2.jpg";
-import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { AiFillHeart, AiOutlineUserDelete } from "react-icons/ai";
 import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 // import StyleContext from "../../Context/StyleContext";
 import { FaRegComment } from "react-icons/fa";
 import {} from "@mui/material/styles";
@@ -21,6 +22,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { CardActions, CardContent, CardMedia } from "@mui/material";
 import { GiShakingHands, GiThreeFriends } from "react-icons/gi";
 import Popup from "../../Components/Profile/Friends";
+import { useCookies } from 'react-cookie';
 
 const Profile = () => {
   const {
@@ -48,19 +50,26 @@ const Profile = () => {
     acceptFrnd,
     dismissFrnd,
     postComments,
-    getComments
+    getComments,
+    loginProcess
   } = useContext(AuthContext);
   // const { successToast, errorToast } = useContext(StyleContext);
 
   const [expanded, setExpanded] = useState(false);
   const [expanded2, setExpanded2] = useState(false);
-  let noFrnds = true;
+  const [provider, setProvider] = useState(false)
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const trueValue = queryParams.get('provider');
+  // if (trueValue){
+  //   setProvider(true)
+  // }
+  // let noFrnds = true;
 
   const handleExpandClick = () => {
     setExpanded2(false);
     setExpanded(!expanded);
   };
-
   const handleExpandClick2 = () => {
     setExpanded(false);
     setExpanded2(!expanded2);
@@ -103,8 +112,24 @@ const Profile = () => {
   const getComment = () => {
 
   }
+  const [cookies] = useCookies(['session']); // Assuming your session cookie is named 'session'
 
   useEffect(() => {
+    // const userData = cookies.session; 
+    // console.log(userData  , "llllllll")
+    // if (userData){
+    //   axios
+    //   .get(BaseUrl + "/socialuser")
+    //   .then((res) => {
+    //     console.log(res, "the social res");
+    //     loginProcess(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err, "the error of social msg");
+    //   });
+    //   console.log(userData)
+    // }
+    
     (async () => {
       if (showPopup){
         getComments()

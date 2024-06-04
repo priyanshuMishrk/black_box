@@ -8,7 +8,7 @@ import Default from "../../Images/defualtProPic.jpg";
 import {  useNavigate } from "react-router-dom";
 // import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
-import AuthContext from "../../Context/AuthContext";
+import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { Link } from "react-router-dom";
@@ -68,7 +68,7 @@ const Registration = () => {
   } = useContext(AuthContext);
 
   const facebook = () => {
-    navigate("/social/facebook");
+    window.location.href =  `${BaseUrl}/signup/facebook`
   };
 
   const google = () => {
@@ -77,7 +77,7 @@ const Registration = () => {
     //   "_blank",
     //   "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400",
     // );
-    navigate("/social/google");
+    window.location.href =  `${BaseUrl}/signup/google`
   };
 
   useEffect(() => {

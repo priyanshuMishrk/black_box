@@ -15,7 +15,8 @@ const Classes = () => {
     <Container
       fluid
       className="p-0 m-0 d-flex justify-content-center classescontainer w-100"
-    >
+    >  
+
       <Container className="p-0 m-0 mb-5">
         <div className="d-flex justify-content-center flex-column w-100 pt-2">
           <div>

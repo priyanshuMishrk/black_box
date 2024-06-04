@@ -4,6 +4,7 @@ import PrivateRoutes from "./Utils/PrivateRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Pages/Loader";
 // import Home from "./Pages/Home/Home";
 import Enter from "./Pages/Home/Enter";
 import Main from "./Pages/Home/Main";
@@ -81,12 +82,12 @@ function App() {
               <Route path="/" element={<Enter />} />
               <Route path="/123308" element={<ClassesOnGoing />} />
               <Route path="/main" element={<Main />} />
+                <Route path="/loadingProfile" element={<Loader/>}/>
               <Route element={<PrivateRoutes />}>
                 <Route path="/host" element={<Choose />} />
                 <Route path="/hosting" element={<LinearStepper />} />
                 <Route path="/hosting2" element={<LinearStepper2 />} />
                 <Route path="/hosting3" element={<LinearStepper3 />} />
-
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit/profile" element={<Edit />} />
                 <Route path="/edit/course/:id" element={<EditCourse />} />
@@ -131,7 +132,7 @@ function App() {
                 path="/joinmeeting/:type/:course_id/:meeting_id/"
                 element={<UIjoinmeeting />}
               />
-              <Route path="/api" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminLogin />} />
               <Route path="/cal" element={<CalendarIcon/>}/>
             </Routes>
           </AuthProvider>

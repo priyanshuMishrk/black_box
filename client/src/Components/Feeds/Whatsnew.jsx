@@ -66,14 +66,19 @@ const Whatsnew = () => {
                   {prop ? (
                     propic ? (
                       <img
+                        width={100}
+                        height={100}
                         src={propic}
-                        className=" mb-1 mt-3 ic2 "
-                        alt={DefaultPic}
+                        alt=""
+                        className="mb-1 mt-3 ic2"
                       />
+                      
+                      // <link rel="preload" href={propic} as="image"  className=" mb-1 mt-3 ic2 "></link>
                     ) : (
                       <img
                         width={100}
                         height={100}
+                        src={DefaultPic}
                         alt=""
                         style={{
                           borderRadius: "50%",

@@ -10,10 +10,10 @@ import {} from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 export const dDomain = "https://test-blackis.dolphinvc.com/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -816,7 +816,10 @@ export const AuthProvider = ({ children }) => {
         setToChoose(false);
       } else if (toChoose === false) {
         navigate(nav);
-      } else {
+      } else if  (nav === "nothing") {
+        console.log("Your are logged in successfully")
+      }
+       else {
         navigate("/classes/join/" + toChoose);
       }
     } catch (err) {

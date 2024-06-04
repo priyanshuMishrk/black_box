@@ -351,13 +351,14 @@ class Users {
         data,
       });
       if (data && data.hasOwnProperty("provider")) {
+        console.log("here in if data has provider key")
         return this.loginWithEmailPass(data.email, password);
       }
+      // console.log(result2)
       return result2;
     } catch (err) {
       console.log(err.message);
       return err.message;
-      console.log(err.message);
     }
   }
 

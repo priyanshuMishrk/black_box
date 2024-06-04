@@ -23,24 +23,24 @@ body {
 }
 
 .gl {
-  font-family: Gilroy-Light;
+  font-family: Gilroy-Light !important;
 }
 
 .gx {
-  font-family: Gilroy-ExtraBold;
+  font-family: Gilroy-ExtraBold !important;
   /* font-weight: 800 !important; */
 }
 
 .gb{
-  font-family: Gilroy-Bold;
+  font-family: Gilroy-Bold !important;
 }
 
 .blw{
-  font-family: Balham;
+  font-family: Balham !important;
 }
 
 .gsb{
-  font-family: Gilroy-SemiBold;
+  font-family: Gilroy-SemiBold !important;
 }
 
 .cp {
@@ -831,6 +831,7 @@ ul{
   font-size: clamp(1.5rem, 6vw, 4rem) !important;
   opacity: 0.9;
   color: rgb(57, 57, 57) !important;
+  margin-top: 5vw;
 }
 
 .noti-content {
@@ -1260,6 +1261,7 @@ li {
 
 .seemorebutton{
   margin-left: 40%;
+    margin-top: 3vw !important;
 }
 
 .classDiv h2 {
@@ -1397,11 +1399,22 @@ background-color: #000000;
   color: #474646;
   font-size: 1.3vw;
   text-transform:uppercase;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit to 3 lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
 }
+
 .cName{
   color: #616060;
   font-size: 1vw;
   text-transform:uppercase;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit to 3 lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
 }
 
 .w-85{
@@ -1636,27 +1649,28 @@ background-color: #000000;
 .alllll{
   position: absolute;
   left: 0vw;
-  top: 10vw;
-  background-color: rgba(0, 0, 0, 0.541);
+  top: 8vw;
   color: white;
-  height: 1vw;
-  width: 1vw;
+  height: 2vw;
+  width: 2vw;
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.13);
   padding: 1vw;
   cursor: pointer;
 }
 
 .arrrr{
   position: absolute;
-  right: 10.8vw;
-  top: 10vw;
-  background-color: rgba(0, 0, 0, 0.541);
+  right: 11.8vw;
+  top: 8vw;
   color: white;
-  height: 1vw;
-  width: 1vw;
+  height: 2vw;
+  width: 2vw;
   border-radius: 50%;
   padding: 1vw;
   cursor: pointer;
+  font-weight: 800;
+  background-color: rgba(0, 0, 0, 0.13);
 }
 .sadjoasasjd{
   background-color: rgba(0, 0, 0, 0.384);
@@ -1684,4 +1698,19 @@ background-color: #000000;
   -webkit-line-clamp: 6; /* Limit to 3 lines of text */
   -webkit-box-orient: vertical;
   overflow: hidden; 
+}
+
+.adminlink{
+  margin-right: 4vw;
+}
+
+.classMeet{
+  position: absolute;
+  z-index: 1;
+  width: 4vw;
+  right: 1vw;
+}
+
+.opc0 {
+  opacity: 0;
 }
